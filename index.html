@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REGO 全齡模組化生活</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans TC",sans-serif;background:#f3f5f2;color:#243b32}
+header{background:#183b30;color:white;padding:24px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:bold;letter-spacing:4px}
+header small{color:#c5d8cc}
+main{max-width:1000px;margin:auto;padding:25px 18px 100px}
+.page{display:none}.page.active{display:block}
+.hero{background:#244b3d;color:white;border-radius:22px;padding:35px 25px;margin-bottom:22px}
+.hero h1{font-size:30px;margin:8px 0}
+.hero p{color:#d6e5dc;line-height:1.8}
+.tag{font-size:12px;letter-spacing:2px;color:#c5d8cc}
+h2{font-size:23px;margin-top:10px}
+h3{margin-bottom:8px}
+.muted{color:#77877e;font-size:14px;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:white;border:1px solid #e2e9e3;border-radius:16px;padding:18px}
+.visual{height:105px;background:#edf3ed;border-radius:12px;display:grid;place-items:center;font-size:48px;margin-bottom:12px}
+button{border:0;border-radius:10px;padding:11px 16px;background:#244b3d;color:white;font-size:14px;cursor:pointer}
+button.secondary{background:#e8eee9;color:#244b3d}
+button:active{transform:scale(.97)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e2e9e3;display:flex;justify-content:center;gap:4px;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:5}
+nav button{background:transparent;color:#718078;flex:1;max-width:130px;padding:9px 2px;font-size:12px}
+nav button.active{background:#e8f0e9;color:#244b3d;font-weight:bold}
+.stat{font-size:28px;font-weight:bold;margin:8px 0;color:#244b3d}
+input{padding:11px;border:1px solid #d8e2da;border-radius:9px;width:100%;margin:7px 0 14px}
+footer{text-align:center;color:#87938b;font-size:12px;padding:20px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.hero{padding:48px}.hero h1{font-size:40px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">REGO</div>
+ <small>GROW WITH EVERY STAGE.</small>
+</header>
+
+<main>
+<section class="page active" id="home">
+ <div class="hero">
+  <div class="tag">SUSTAINABLE · MODULAR · ALL AGES</div>
+  <h1>陪伴每一個人生階段</h1>
+  <p>一件產品，不只陪伴一時。透過模組拼裝與循環再利用，讓產品隨著生活需求改變。</p>
+  <button onclick="showPage('products')">探索 REGO →</button>
+ </div>
+ <h2>探索四個人生階段</h2>
+ <div class="grid">
+  <div class="card"><div class="visual">🧸</div><b>兒童</b><p class="muted">探索與成長</p></div>
+  <div class="card"><div class="visual">🚲</div><b>青年</b><p class="muted">自由與移動</p></div>
+  <div class="card"><div class="visual">🛒</div><b>壯年</b><p class="muted">生活與便利</p></div>
+  <div class="card"><div class="visual">🚶</div><b>老年</b><p class="muted">安心與陪伴</p></div>
+ </div>
+</section>
+
+<section class="page" id="products">
+ <h2>產品 Products</h2>
+ <p class="muted">選擇年齡階段，看看 REGO 如何陪伴不同時期的生活。</p>
+ <div class="actions">
+  <button onclick="showProducts('兒童')">兒童</button>
+  <button onclick="showProducts('青年')">青年</button>
+  <button onclick="showProducts('壯年')">壯年</button>
+  <button onclick="showProducts('老年')">老年</button>
+ </div>
+ <div class="card" style="margin-top:16px">
+  <div class="visual" id="productIcon">🧸</div>
+  <h3 id="productTitle">兒童階段</h3>
+  <p class="muted" id="productDesc">透過遊戲與移動，陪伴孩子探索世界。</p>
+  <p id="productItems">搖搖馬、滑步車</p>
+ </div>
+</section>
+
+<section class="page" id="module">
+ <h2>模組 Module</h2>
+ <p class="muted">選擇不同模組，查看 REGO 的產品組合概念。</p>
+ <div class="grid">
+  <div class="card"><div class="visual">🔩</div><b>管件結構</b><p class="muted">以管件作為產品的主要支撐。</p><button onclick="chooseModule('管件結構','作為產品的主要支撐，連接不同模組。')">查看</button></div>
+  <div class="card"><div class="visual">🔗</div><b>插槽連接</b><p class="muted">透過插槽方式組裝與拆卸。</p><button onclick="chooseModule('插槽連接','透過插槽連接，讓模組可以拆卸及重新組合。')">查看</button></div>
+  <div class="card"><div class="visual">🛞</div><b>輪組模組</b><p class="muted">依照使用需求改變移動方式。</p><button onclick="chooseModule('輪組模組','輪組可配合不同產品需求進行配置。')">查看</button></div>
+  <div class="card"><div class="visual">♻️</div><b>循環再利用</b><p class="muted">延長零件使用壽命。</p><button onclick="chooseModule('循環再利用','保留可重複使用的零件，減少資源浪費。')">查看</button></div>
+ </div>
+ <div class="card" style="margin-top:16px">
+  <h3 id="moduleTitle">模組介紹</h3>
+  <p class="muted" id="moduleDesc">點選上方模組，查看介紹。</p>
+ </div>
+</section>
+
+<section class="page" id="records">
+ <h2>使用紀錄 Records</h2>
+ <p class="muted">以下為示範數據，可透過按鈕模擬增加使用紀錄。</p>
+ <div class="grid">
+  <div class="card"><div class="muted">累積使用時間</div><div class="stat" id="hours">12 小時</div></div>
+  <div class="card"><div class="muted">使用次數</div><div class="stat" id="times">8 次</div></div>
+  <div class="card"><div class="muted">模擬發電量</div><div class="stat" id="energy">5.2 Wh</div></div>
+  <div class="card"><div class="muted">使用狀態</div><div class="stat">良好</div></div>
+ </div>
+ <div class="card" style="margin-top:16px">
+  <h3>新增一次模擬使用</h3>
+  <p class="muted">點擊下方按鈕，更新示範數據。</p>
+  <button onclick="addRecord()">＋ 新增使用紀錄</button>
+ </div>
+</section>
+
+<section class="page" id="profile">
+ <h2>我的 Profile</h2>
+ <div class="card">
+  <div class="visual">👤</div>
+  <h3>REGO 使用者</h3>
+  <p class="muted">在這裡管理你的產品與個人設定。</p>
+  <label>使用者名稱</label>
+  <input id="username" placeholder="輸入你的名稱">
+  <button onclick="saveName()">儲存名稱</button>
+  <p id="savedName" class="muted"></p>
+ </div>
+ <div class="card" style="margin-top:14px">
+  <h3>產品保養提醒</h3>
+  <p class="muted">定期檢查管件、插槽及輪組，保持產品良好狀態。</p>
+ </div>
+ <div class="card" style="margin-top:14px">
+  <h3>關於 REGO</h3>
+  <p class="muted">永續循環 × 全齡適用 × 模組拼裝</p>
+ </div>
+</section>
+<footer>REGO · GROW WITH EVERY STAGE.</footer>
+</main>
+
+<nav>
+ <button class="active" onclick="showPage('home',this)">⌂<br>首頁</button>
+ <button onclick="showPage('products',this)">▦<br>產品</button>
+ <button onclick="showPage('module',this)">◇<br>模組</button>
+ <button onclick="showPage('records',this)">▤<br>紀錄</button>
+ <button onclick="showPage('profile',this)">○<br>我的</button>
+</nav>
+
+<script>
+function showPage(id,btn){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ else document.querySelectorAll('nav button')[['home','products','module','records','profile'].indexOf(id)].classList.add('active');
+ window.scrollTo(0,0);
+}
+const products={
+ '兒童':['🧸','兒童階段','透過遊戲與移動，陪伴孩子探索世界。','搖搖馬、滑步車'],
+ '青年':['🚲','青年階段','提供自由移動與日常活動的使用體驗。','腳踏車、滑板車'],
+ '壯年':['🛒','壯年階段','配合生活需求，讓日常移動更加便利。','折疊推車、平衡車'],
+ '老年':['🚶','老年階段','提供生活移動上的支持與陪伴。','買菜車、助行器']
+};
+function showProducts(age){
+ const p=products[age];
+ document.getElementById('productIcon').textContent=p[0];
+ document.getElementById('productTitle').textContent=p[1];
+ document.getElementById('productDesc').textContent=p[2];
+ document.getElementById('productItems').textContent=p[3];
+}
+function chooseModule(title,desc){
+ document.getElementById('moduleTitle').textContent=title;
+ document.getElementById('moduleDesc').textContent=desc;
+}
+let count=8,hours=12,energy=5.2;
+function addRecord(){
+ count++;hours++;
+ energy+=0.3;
+ document.getElementById('times').textContent=count+' 次';
+ document.getElementById('hours').textContent=hours+' 小時';
+ document.getElementById('energy').textContent=energy.toFixed(1)+' Wh';
+}
+function saveName(){
+ const name=document.getElementById('username').value.trim();
+ document.getElementById('savedName').textContent=name?'已儲存：'+name:'請先輸入名稱';
+}
+</script>
+</body>
+</html>
