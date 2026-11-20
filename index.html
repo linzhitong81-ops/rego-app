@@ -7,31 +7,43 @@
 <title>REGO 全齡模組化生活</title>
 
 <style>
+:root{
+ --blue:#285477;
+ --blue-dark:#183b56;
+ --blue-light:#eaf2f8;
+ --orange:#f29a38;
+ --orange-light:#fff1df;
+ --bg:#f4f7fa;
+ --text:#263b4b;
+ --muted:#788895;
+ --white:#ffffff;
+}
+
 *{box-sizing:border-box}
 
 body{
  margin:0;
  font-family:Arial,"Noto Sans TC",sans-serif;
- background:#f3f5f2;
- color:#243b32;
+ background:var(--bg);
+ color:var(--text);
 }
 
 header{
- background:#183b30;
+ background:var(--blue-dark);
  color:white;
- padding:24px 7%;
+ padding:22px 7%;
  display:flex;
  justify-content:space-between;
  align-items:center;
 }
 
 .logo{
- font-size:27px;
+ font-size:28px;
  font-weight:bold;
  letter-spacing:4px;
 }
 
-header small{color:#c5d8cc}
+header small{color:#d3e4f0}
 
 main{
  max-width:1000px;
@@ -43,27 +55,29 @@ main{
 .page.active{display:block}
 
 .hero{
- background:#244b3d;
+ background:var(--blue);
  color:white;
  border-radius:22px;
  padding:35px 25px;
  margin-bottom:22px;
+ position:relative;
+ overflow:hidden;
 }
 
 .hero h1{
  font-size:30px;
- margin:8px 0;
+ margin:10px 0;
 }
 
 .hero p{
- color:#d6e5dc;
+ color:#e0edf6;
  line-height:1.8;
 }
 
 .tag{
  font-size:12px;
  letter-spacing:2px;
- color:#c5d8cc;
+ color:#d5e7f3;
 }
 
 h2{
@@ -74,7 +88,7 @@ h2{
 h3{margin-bottom:8px}
 
 .muted{
- color:#77877e;
+ color:var(--muted);
  font-size:14px;
  line-height:1.7;
 }
@@ -86,15 +100,15 @@ h3{margin-bottom:8px}
 }
 
 .card{
- background:white;
- border:1px solid #e2e9e3;
+ background:var(--white);
+ border:1px solid #e1e9ef;
  border-radius:16px;
  padding:18px;
 }
 
 .visual{
  height:105px;
- background:#edf3ed;
+ background:var(--blue-light);
  border-radius:12px;
  display:grid;
  place-items:center;
@@ -106,18 +120,32 @@ button{
  border:0;
  border-radius:10px;
  padding:11px 16px;
- background:#244b3d;
+ background:var(--blue);
  color:white;
  font-size:14px;
  cursor:pointer;
+ transition:0.2s;
 }
 
-button.secondary{
- background:#e8eee9;
- color:#244b3d;
+button:hover{
+ background:var(--blue-dark);
 }
 
 button:active{transform:scale(.97)}
+
+button.orange{
+ background:var(--orange);
+ color:#263b4b;
+}
+
+button.orange:hover{
+ background:#e78925;
+}
+
+button.secondary{
+ background:var(--blue-light);
+ color:var(--blue);
+}
 
 .actions{
  display:flex;
@@ -133,12 +161,65 @@ button:active{transform:scale(.97)}
 
 .age-card:hover{
  transform:translateY(-5px);
- border-color:#244b3d;
- box-shadow:0 5px 15px rgba(36,75,61,0.12);
+ border-color:var(--orange);
+ box-shadow:0 5px 15px rgba(40,84,119,0.12);
 }
 
 .age-card button{
  margin-top:5px;
+}
+
+.back-button{
+ display:inline-flex;
+ align-items:center;
+ gap:6px;
+ margin-bottom:18px;
+ background:var(--orange);
+ color:#263b4b;
+ font-weight:bold;
+}
+
+.back-button:hover{
+ background:#e78925;
+}
+
+.stage-button{
+ background:var(--blue-light);
+ color:var(--blue);
+}
+
+.stage-button.selected{
+ background:var(--orange);
+ color:#263b4b;
+ font-weight:bold;
+}
+
+.product-card{
+ transition:0.2s;
+}
+
+.product-card:hover{
+ transform:translateY(-3px);
+ border-color:var(--orange);
+}
+
+.product-card .visual{
+ background:var(--orange-light);
+}
+
+.product-label{
+ display:inline-block;
+ background:var(--blue-light);
+ color:var(--blue);
+ border-radius:20px;
+ padding:5px 10px;
+ font-size:12px;
+ margin-top:8px;
+}
+
+.product-placeholder{
+ border:1px dashed #e7a65c;
+ background:#fffaf3;
 }
 
 nav{
@@ -147,7 +228,7 @@ nav{
  left:0;
  right:0;
  background:white;
- border-top:1px solid #e2e9e3;
+ border-top:1px solid #e1e9ef;
  display:flex;
  justify-content:center;
  gap:4px;
@@ -157,7 +238,7 @@ nav{
 
 nav button{
  background:transparent;
- color:#718078;
+ color:var(--muted);
  flex:1;
  max-width:130px;
  padding:9px 2px;
@@ -165,8 +246,8 @@ nav button{
 }
 
 nav button.active{
- background:#e8f0e9;
- color:#244b3d;
+ background:var(--blue-light);
+ color:var(--blue);
  font-weight:bold;
 }
 
@@ -174,7 +255,7 @@ nav button.active{
  font-size:28px;
  font-weight:bold;
  margin:8px 0;
- color:#244b3d;
+ color:var(--blue);
 }
 
 input{
@@ -187,7 +268,7 @@ input{
 
 footer{
  text-align:center;
- color:#87938b;
+ color:#87939b;
  font-size:12px;
  padding:20px;
 }
@@ -216,10 +297,11 @@ footer{
   <div class="tag">SUSTAINABLE · MODULAR · ALL AGES</div>
   <h1>陪伴每一個人生階段</h1>
   <p>一件產品，不只陪伴一時。透過模組拼裝與循環再利用，讓產品隨著生活需求改變。</p>
-  <button onclick="showPage('products')">探索 REGO →</button>
+  <button class="orange" onclick="showPage('products')">探索 REGO →</button>
  </div>
 
  <h2>探索四個人生階段</h2>
+ <p class="muted">點選不同階段，探索適合自己的 REGO 產品。</p>
 
  <div class="grid">
 
@@ -227,28 +309,28 @@ footer{
    <div class="visual">🧸</div>
    <b>兒童</b>
    <p class="muted">探索與成長</p>
-   <button>立即探索 →</button>
+   <button class="orange">立即探索 →</button>
   </div>
 
   <div class="card age-card" onclick="openAge('青年')">
    <div class="visual">🚲</div>
    <b>青年</b>
    <p class="muted">自由與移動</p>
-   <button>立即探索 →</button>
+   <button class="orange">立即探索 →</button>
   </div>
 
   <div class="card age-card" onclick="openAge('壯年')">
    <div class="visual">🛒</div>
    <b>壯年</b>
    <p class="muted">生活與便利</p>
-   <button>立即探索 →</button>
+   <button class="orange">立即探索 →</button>
   </div>
 
   <div class="card age-card" onclick="openAge('老年')">
    <div class="visual">🚶</div>
    <b>老年</b>
    <p class="muted">安心與陪伴</p>
-   <button>立即探索 →</button>
+   <button class="orange">立即探索 →</button>
   </div>
 
  </div>
@@ -258,21 +340,24 @@ footer{
 <!-- 產品頁 -->
 <section class="page" id="products">
 
+ <button class="back-button" onclick="showPage('home')">
+  ← 返回首頁
+ </button>
+
  <h2>產品 Products</h2>
- <p class="muted">選擇年齡階段，看看 REGO 如何陪伴不同時期的生活。</p>
+ <p class="muted">選擇年齡階段，查看不同時期適合的產品。</p>
 
  <div class="actions">
-  <button onclick="showProducts('兒童')">兒童</button>
-  <button onclick="showProducts('青年')">青年</button>
-  <button onclick="showProducts('壯年')">壯年</button>
-  <button onclick="showProducts('老年')">老年</button>
+  <button class="stage-button selected" id="btn-兒童" onclick="showProducts('兒童')">兒童</button>
+  <button class="stage-button" id="btn-青年" onclick="showProducts('青年')">青年</button>
+  <button class="stage-button" id="btn-壯年" onclick="showProducts('壯年')">壯年</button>
+  <button class="stage-button" id="btn-老年" onclick="showProducts('老年')">老年</button>
  </div>
 
- <div class="card" style="margin-top:16px">
-  <div class="visual" id="productIcon">🧸</div>
-  <h3 id="productTitle">兒童階段</h3>
-  <p class="muted" id="productDesc">透過遊戲與移動，陪伴孩子探索世界。</p>
-  <p id="productItems">搖搖馬、滑步車</p>
+ <div style="margin-top:22px">
+  <h3 id="stageTitle">兒童階段</h3>
+  <p class="muted" id="stageDesc">透過遊戲與移動，陪伴孩子探索世界。</p>
+  <div class="grid" id="productList"></div>
  </div>
 
 </section>
@@ -357,7 +442,7 @@ footer{
  <div class="card" style="margin-top:16px">
   <h3>新增一次模擬使用</h3>
   <p class="muted">點擊下方按鈕，更新示範數據。</p>
-  <button onclick="addRecord()">＋ 新增使用紀錄</button>
+  <button class="orange" onclick="addRecord()">＋ 新增使用紀錄</button>
  </div>
 
 </section>
@@ -376,7 +461,7 @@ footer{
   <label>使用者名稱</label>
   <input id="username" placeholder="輸入你的名稱">
 
-  <button onclick="saveName()">儲存名稱</button>
+  <button class="orange" onclick="saveName()">儲存名稱</button>
   <p id="savedName" class="muted"></p>
  </div>
 
@@ -425,45 +510,48 @@ function showPage(id,btn){
  if(btn){
   btn.classList.add('active');
  }else{
-  document.querySelectorAll('nav button')[
-   ['home','products','module','records','profile'].indexOf(id)
-  ].classList.add('active');
+  const index=['home','products','module','records','profile'].indexOf(id);
+  document.querySelectorAll('nav button')[index].classList.add('active');
  }
 
  window.scrollTo(0,0);
 }
 
 
-// 四個年齡階段資料
+// 四個年齡階段產品資料
 const products={
 
- '兒童':[
-  '🧸',
-  '兒童階段',
-  '透過遊戲與移動，陪伴孩子探索世界。',
-  '搖搖馬、滑步車'
- ],
+ '兒童':{
+  desc:'透過遊戲與移動，陪伴孩子探索世界。',
+  items:[
+   {icon:'🧸',name:'搖搖馬',desc:'透過搖擺與遊戲，帶來有趣的體驗。'},
+   {icon:'🛴',name:'滑步車',desc:'透過雙腳滑行，練習平衡與移動。'},
+   {icon:'✨',name:'第三項產品',desc:'新產品正在規劃中，敬請期待。',placeholder:true}
+  ]
+ },
 
- '青年':[
-  '🚲',
-  '青年階段',
-  '提供自由移動與日常活動的使用體驗。',
-  '腳踏車、滑板車'
- ],
+ '青年':{
+  desc:'提供自由移動與日常活動的使用體驗。',
+  items:[
+   {icon:'🚲',name:'腳踏車',desc:'適合日常移動與休閒活動。'},
+   {icon:'🛴',name:'滑板車',desc:'輕巧方便，讓移動更加自由。'}
+  ]
+ },
 
- '壯年':[
-  '🛒',
-  '壯年階段',
-  '配合生活需求，讓日常移動更加便利。',
-  '折疊推車、平衡車'
- ],
+ '壯年':{
+  desc:'配合生活需求，讓日常移動更加便利。',
+  items:[
+   {icon:'🛒',name:'折疊推車',desc:'協助日常物品搬運，並可依需求收納。'}
+  ]
+ },
 
- '老年':[
-  '🚶',
-  '老年階段',
-  '提供生活移動上的支持與陪伴。',
-  '買菜車、助行器'
- ]
+ '老年':{
+  desc:'提供生活移動上的支持與陪伴。',
+  items:[
+   {icon:'🛒',name:'買菜車',desc:'方便日常採買與物品攜帶。'},
+   {icon:'🚶',name:'助行器',desc:'提供日常行走時的輔助與支持。'}
+  ]
+ }
 
 };
 
@@ -478,22 +566,62 @@ function openAge(age){
 // 切換產品內容
 function showProducts(age){
 
- const p=products[age];
+ const data=products[age];
 
- document.getElementById('productIcon').textContent=p[0];
- document.getElementById('productTitle').textContent=p[1];
- document.getElementById('productDesc').textContent=p[2];
- document.getElementById('productItems').textContent=p[3];
+ document.getElementById('stageTitle').textContent=age+'階段';
+ document.getElementById('stageDesc').textContent=data.desc;
+
+ // 更新年齡按鈕顏色
+ document.querySelectorAll('.stage-button').forEach(btn=>{
+  btn.classList.remove('selected');
+ });
+
+ document.getElementById('btn-'+age).classList.add('selected');
+
+ // 顯示產品卡片
+ const list=document.getElementById('productList');
+ list.innerHTML='';
+
+ data.items.forEach(item=>{
+
+  const card=document.createElement('div');
+  card.className='card product-card';
+
+  if(item.placeholder){
+   card.classList.add('product-placeholder');
+  }
+
+  const visual=document.createElement('div');
+  visual.className='visual';
+  visual.textContent=item.icon;
+
+  const title=document.createElement('h3');
+  title.textContent=item.name;
+
+  const desc=document.createElement('p');
+  desc.className='muted';
+  desc.textContent=item.desc;
+
+  const label=document.createElement('span');
+  label.className='product-label';
+  label.textContent=item.placeholder?'規劃中':'REGO 產品';
+
+  card.appendChild(visual);
+  card.appendChild(title);
+  card.appendChild(desc);
+  card.appendChild(label);
+
+  list.appendChild(card);
+
+ });
 
 }
 
 
 // 模組介紹
 function chooseModule(title,desc){
-
  document.getElementById('moduleTitle').textContent=title;
  document.getElementById('moduleDesc').textContent=desc;
-
 }
 
 
@@ -524,6 +652,10 @@ function saveName(){
   name?'已儲存：'+name:'請先輸入名稱';
 
 }
+
+
+// 預設顯示兒童產品
+showProducts('兒童');
 
 </script>
 
