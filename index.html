@@ -30,7 +30,6 @@ body {
   color: var(--text);
 }
 
-/* 頂部 */
 header {
   background: var(--blue);
   color: white;
@@ -49,7 +48,6 @@ header {
   margin-top: 4px;
 }
 
-/* 頁面 */
 .page {
   display: none;
   min-height: calc(100vh - 90px);
@@ -82,6 +80,14 @@ header {
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.age-card:active,
+.product-card:active,
+.feature-card:active {
+  transform: scale(0.97);
 }
 
 .age-card:nth-child(odd) {
@@ -93,7 +99,7 @@ header {
 }
 
 .age-icon {
-  font-size: 55px;
+  font-size: 60px;
   margin-bottom: 8px;
 }
 
@@ -102,25 +108,7 @@ header {
   margin: 5px 0;
 }
 
-.age-card button {
-  width: 90%;
-  max-width: 230px;
-  padding: 15px 10px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 30px;
-  background: var(--blue);
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.age-card:nth-child(even) button {
-  background: var(--orange);
-}
-
-/* 產品頁 */
+/* 按鈕 */
 .back-button {
   border: none;
   background: var(--blue-light);
@@ -133,6 +121,7 @@ header {
   margin-bottom: 15px;
 }
 
+/* 產品頁 */
 .products-heading {
   text-align: center;
   margin: 5px 0 15px;
@@ -149,7 +138,6 @@ header {
   margin: 5px 0 15px;
 }
 
-/* 年齡切換 */
 .age-tabs {
   display: flex;
   justify-content: center;
@@ -178,7 +166,6 @@ header {
   background: var(--orange);
 }
 
-/* 目前年齡標題 */
 .stage-title {
   text-align: center;
   margin: 10px 0 5px;
@@ -192,7 +179,6 @@ header {
   margin: 5px 0 18px;
 }
 
-/* 產品列表 */
 .product-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -207,6 +193,8 @@ header {
   padding: 20px 12px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .product-icon {
@@ -241,39 +229,254 @@ header {
   color: #bd7625;
 }
 
-/* 手機 */
+/* 搖搖馬專區 */
+.feature-heading {
+  text-align: center;
+  margin: 10px 0 25px;
+}
+
+.feature-heading .big-icon {
+  font-size: 75px;
+}
+
+.feature-heading h1 {
+  margin: 8px 0;
+  font-size: 26px;
+}
+
+.feature-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 22px;
+  padding: 28px 12px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid var(--blue-light);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: 0.2s;
+}
+
+.feature-card:nth-child(even) {
+  border-color: var(--orange-light);
+}
+
+.feature-icon {
+  font-size: 55px;
+}
+
+.feature-card h2 {
+  font-size: 20px;
+  margin: 12px 0 5px;
+}
+
+.feature-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 兒歌列表 */
+.content-title {
+  text-align: center;
+  font-size: 24px;
+  margin: 10px 0 20px;
+}
+
+.song-list {
+  max-width: 650px;
+  margin: auto;
+}
+
+.song-card {
+  background: white;
+  padding: 17px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.song-icon {
+  font-size: 35px;
+}
+
+.song-info h3 {
+  margin: 0 0 5px;
+  font-size: 17px;
+}
+
+.song-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.song-button {
+  border: none;
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  padding: 10px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 繪本列表 */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-width: 650px;
+  margin: auto;
+}
+
+.book-card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px 12px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.book-cover {
+  height: 130px;
+  border-radius: 14px;
+  background: var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 65px;
+  margin-bottom: 12px;
+}
+
+.book-card:nth-child(even) .book-cover {
+  background: var(--orange-light);
+}
+
+.book-card h3 {
+  margin: 5px 0;
+  font-size: 17px;
+}
+
+.book-card p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 閱讀故事 */
+.story-container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  border-radius: 22px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.story-picture {
+  background: var(--blue-light);
+  border-radius: 18px;
+  padding: 35px 10px;
+  font-size: 85px;
+  margin-bottom: 20px;
+}
+
+.story-container h2 {
+  font-size: 23px;
+}
+
+.story-text {
+  font-size: 17px;
+  line-height: 2;
+  min-height: 110px;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.story-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.story-controls button {
+  border: none;
+  background: var(--blue);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.story-controls button:last-child {
+  background: var(--orange);
+}
+
+.story-page-number {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 15px;
+}
+
 @media (max-width: 480px) {
   .page {
     padding: 15px;
   }
 
-  .age-grid {
+  .age-grid,
+  .feature-grid {
     gap: 12px;
   }
 
   .age-card {
-    padding: 18px 8px;
+    padding: 20px 8px;
   }
 
   .age-icon {
-    font-size: 45px;
+    font-size: 50px;
   }
 
   .age-card h2 {
     font-size: 18px;
   }
 
-  .age-card button {
-    font-size: 16px;
-    padding: 13px 5px;
-  }
-
-  .product-list {
+  .product-list,
+  .book-list {
     gap: 10px;
   }
 
   .product-card {
     padding: 16px 8px;
+  }
+
+  .book-cover {
+    height: 105px;
+    font-size: 55px;
   }
 }
 </style>
@@ -293,28 +496,24 @@ header {
 
   <div class="age-grid">
 
-    <div class="age-card">
+    <div class="age-card" onclick="openAge('child')">
       <div class="age-icon">🧸</div>
       <h2>兒童</h2>
-      <button onclick="openAge('child')">產品介紹</button>
     </div>
 
-    <div class="age-card">
+    <div class="age-card" onclick="openAge('youth')">
       <div class="age-icon">🚲</div>
       <h2>青年</h2>
-      <button onclick="openAge('youth')">產品介紹</button>
     </div>
 
-    <div class="age-card">
+    <div class="age-card" onclick="openAge('adult')">
       <div class="age-icon">🛒</div>
       <h2>壯年</h2>
-      <button onclick="openAge('adult')">產品介紹</button>
     </div>
 
-    <div class="age-card">
+    <div class="age-card" onclick="openAge('senior')">
       <div class="age-icon">🚶</div>
       <h2>老年</h2>
-      <button onclick="openAge('senior')">產品介紹</button>
     </div>
 
   </div>
@@ -346,6 +545,141 @@ header {
 
 </section>
 
+<!-- 搖搖馬專區 -->
+<section id="rocking" class="page">
+
+  <button class="back-button" onclick="showPage('products')">
+    ← 返回兒童產品
+  </button>
+
+  <div class="feature-heading">
+    <div class="big-icon">🧸</div>
+    <h1>搖搖馬互動專區</h1>
+    <p>一起聽兒歌、讀故事，享受快樂時光！</p>
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="feature-card" onclick="showPage('songs')">
+      <div class="feature-icon">🎵</div>
+      <h2>兒歌天地</h2>
+      <p>一起聽歌、唱歌、動動身體</p>
+    </div>
+
+    <div class="feature-card" onclick="showPage('books')">
+      <div class="feature-icon">📚</div>
+      <h2>故事繪本</h2>
+      <p>進入有趣的故事世界</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 兒歌頁 -->
+<section id="songs" class="page">
+
+  <button class="back-button" onclick="showPage('rocking')">
+    ← 返回搖搖馬
+  </button>
+
+  <h1 class="content-title">🎵 兒歌天地</h1>
+
+  <div class="song-list">
+
+    <div class="song-card">
+      <div class="song-info">
+        <div class="song-icon">⭐</div>
+        <div>
+          <h3>小星星</h3>
+          <p>經典童謠・認識夜空</p>
+        </div>
+      </div>
+      <button class="song-button" onclick="searchSong('小星星 兒歌')">聽兒歌</button>
+    </div>
+
+    <div class="song-card">
+      <div class="song-info">
+        <div class="song-icon">🐯</div>
+        <div>
+          <h3>兩隻老虎</h3>
+          <p>經典童謠・跟著節奏唱</p>
+        </div>
+      </div>
+      <button class="song-button" onclick="searchSong('兩隻老虎 兒歌')">聽兒歌</button>
+    </div>
+
+    <div class="song-card">
+      <div class="song-info">
+        <div class="song-icon">🥕</div>
+        <div>
+          <h3>拔蘿蔔</h3>
+          <p>趣味童謠・一起來幫忙</p>
+        </div>
+      </div>
+      <button class="song-button" onclick="searchSong('拔蘿蔔 兒歌')">聽兒歌</button>
+    </div>
+
+    <div class="song-card">
+      <div class="song-info">
+        <div class="song-icon">🚌</div>
+        <div>
+          <h3>公車來了</h3>
+          <p>交通主題・認識生活</p>
+        </div>
+      </div>
+      <button class="song-button" onclick="searchSong('公車 兒歌')">聽兒歌</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- 繪本列表 -->
+<section id="books" class="page">
+
+  <button class="back-button" onclick="showPage('rocking')">
+    ← 返回搖搖馬
+  </button>
+
+  <h1 class="content-title">📚 故事繪本</h1>
+
+  <div class="book-list">
+
+    <div class="book-card" onclick="openStory('forest')">
+      <div class="book-cover">🐰</div>
+      <h3>小兔子的冒險</h3>
+      <p>一場森林探索之旅</p>
+    </div>
+
+    <div class="book-card" onclick="openStory('star')">
+      <div class="book-cover">⭐</div>
+      <h3>找星星的小熊</h3>
+      <p>關於勇氣與友誼的故事</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 故事閱讀頁 -->
+<section id="story" class="page">
+
+  <button class="back-button" onclick="showPage('books')">
+    ← 返回繪本列表
+  </button>
+
+  <div class="story-container">
+    <div class="story-picture" id="storyPicture">🐰</div>
+    <h2 id="storyTitle"></h2>
+    <div class="story-text" id="storyText"></div>
+
+    <div class="story-controls">
+      <button onclick="changeStoryPage(-1)">上一頁</button>
+      <button onclick="changeStoryPage(1)">下一頁</button>
+    </div>
+
+    <div class="story-page-number" id="storyPageNumber"></div>
+  </div>
+</section>
+
 <script>
 const products = {
   child: {
@@ -355,17 +689,18 @@ const products = {
       {
         icon: "🧸",
         name: "搖搖馬",
-        desc: "透過前後搖動，讓孩子享受遊戲樂趣。",
+        desc: "透過前後搖動，享受遊戲樂趣。",
+        action: "rocking"
       },
       {
         icon: "🛴",
         name: "滑步車",
-        desc: "幫助孩子練習平衡，探索移動的樂趣。",
+        desc: "幫助孩子練習平衡，探索移動的樂趣。"
       },
       {
         icon: "🚗",
         name: "兒童拖車",
-        desc: "提供不同的遊戲與移動使用方式。",
+        desc: "提供不同的遊戲與移動使用方式。"
       }
     ]
   },
@@ -377,12 +712,12 @@ const products = {
       {
         icon: "🚲",
         name: "腳踏車",
-        desc: "適合日常通勤與戶外活動。",
+        desc: "適合日常通勤與戶外活動。"
       },
       {
         icon: "🛴",
         name: "滑板車",
-        desc: "輕巧方便，適合短距離移動。",
+        desc: "輕巧方便，適合短距離移動。"
       }
     ]
   },
@@ -394,7 +729,7 @@ const products = {
       {
         icon: "🛒",
         name: "折疊推車",
-        desc: "方便搬運物品，也能節省收納空間。",
+        desc: "方便搬運物品，也能節省收納空間。"
       }
     ]
   },
@@ -406,12 +741,12 @@ const products = {
       {
         icon: "🛒",
         name: "買菜車",
-        desc: "方便外出購物與攜帶日常用品。",
+        desc: "方便外出購物與攜帶日常用品。"
       },
       {
         icon: "🚶",
         name: "助行器",
-        desc: "提供行走時的支撐與輔助。",
+        desc: "提供行走時的支撐與輔助。"
       }
     ]
   }
@@ -456,18 +791,120 @@ function openAge(age) {
       <span class="product-label">REGO 全齡產品</span>
     `;
 
+    if (item.action) {
+      card.onclick = () => showPage(item.action);
+    }
+
     list.appendChild(card);
   });
 
   showPage("products");
+}
 
-  // 直接跳到產品列表，不用自己往下滑
-  requestAnimationFrame(() => {
-    list.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  });
+/* 兒歌搜尋 */
+function searchSong(song) {
+  const url = "https://www.youtube.com/results?search_query=" + encodeURIComponent(song);
+  window.open(url, "_blank");
+}
+
+/* 原創繪本故事 */
+const stories = {
+  forest: {
+    title: "小兔子的冒險",
+    pages: [
+      {
+        picture: "🐰🌳",
+        text: "在一座美麗的森林裡，住著一隻喜歡冒險的小兔子。\n有一天，牠決定出門探索森林。"
+      },
+      {
+        picture: "🐰🦋",
+        text: "走著走著，小兔子遇見了一隻漂亮的蝴蝶。\n蝴蝶說：「你好呀！你要去哪裡呢？」"
+      },
+      {
+        picture: "🐰🐿️",
+        text: "小兔子說：「我想去看看森林的另一邊！」\n這時，一隻小松鼠也加入了牠的旅程。"
+      },
+      {
+        picture: "🌈🐰",
+        text: "牠們一起走過小溪、爬過小山，最後看見了一道美麗的彩虹。\n小兔子開心地說：「原來和朋友一起冒險這麼有趣！」"
+      },
+      {
+        picture: "🐰❤️",
+        text: "從那天開始，小兔子和朋友們經常一起探索森林。\n每一天，都有新的驚喜等著牠們！"
+      }
+    ]
+  },
+
+  star: {
+    title: "找星星的小熊",
+    pages: [
+      {
+        picture: "🐻🌙",
+        text: "夜晚到了，小熊坐在窗邊，看著天空中的星星。\n牠發現有一顆星星好像不見了。"
+      },
+      {
+        picture: "🐻✨",
+        text: "小熊決定出門尋找星星。\n牠走過草地，遇見了正在散步的小狐狸。"
+      },
+      {
+        picture: "🦊🐻",
+        text: "小狐狸問：「你在找什麼呀？」\n小熊回答：「我在找那顆不見的星星！」\n於是小狐狸決定陪牠一起找。"
+      },
+      {
+        picture: "🐻⭐",
+        text: "牠們抬頭一看，發現星星其實一直都在天空中。\n只是被一大片雲朵遮住了。"
+      },
+      {
+        picture: "🐻🦊❤️",
+        text: "小熊開心地笑了。\n牠明白了，有朋友陪伴的夜晚，就像星星一樣閃閃發亮。"
+      }
+    ]
+  }
+};
+
+let currentStory = "";
+let currentStoryPage = 0;
+
+function openStory(name) {
+  currentStory = name;
+  currentStoryPage = 0;
+  showStoryContent();
+  showPage("story");
+}
+
+function showStoryContent() {
+  const story = stories[currentStory];
+  const page = story.pages[currentStoryPage];
+
+  document.getElementById("storyTitle").textContent = story.title;
+  document.getElementById("storyPicture").textContent = page.picture;
+  document.getElementById("storyText").textContent = page.text;
+
+  document.getElementById("storyPageNumber").textContent =
+    "第 " + (currentStoryPage + 1) + " / " + story.pages.length + " 頁";
+
+  const buttons = document.querySelectorAll(".story-controls button");
+  buttons[0].disabled = currentStoryPage === 0;
+  buttons[1].disabled = currentStoryPage === story.pages.length - 1;
+
+  buttons[0].style.opacity = currentStoryPage === 0 ? "0.4" : "1";
+  buttons[1].style.opacity = currentStoryPage === story.pages.length - 1 ? "0.4" : "1";
+}
+
+function changeStoryPage(direction) {
+  const story = stories[currentStory];
+
+  currentStoryPage += direction;
+
+  if (currentStoryPage < 0) {
+    currentStoryPage = 0;
+  }
+
+  if (currentStoryPage >= story.pages.length) {
+    currentStoryPage = story.pages.length - 1;
+  }
+
+  showStoryContent();
 }
 </script>
 
