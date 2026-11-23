@@ -155,15 +155,27 @@ button.secondary{
  margin-top:12px;
 }
 
-/* 首頁四個年齡卡片 */
+/* 首頁：四個大按鈕置中 */
+#home{
+ min-height:calc(100vh - 170px);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
 #home .grid{
- gap:20px;
+ width:100%;
+ max-width:760px;
+ margin:auto;
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:26px;
 }
 
 #home .age-card{
- min-height:220px;
- padding:22px 16px;
- border-radius:20px;
+ min-height:280px;
+ padding:25px 18px;
+ border-radius:24px;
  cursor:pointer;
  text-align:center;
  display:flex;
@@ -171,29 +183,27 @@ button.secondary{
  align-items:center;
  justify-content:center;
  transition:0.2s;
+ box-shadow:0 5px 18px rgba(40,84,119,0.07);
 }
 
 #home .age-card:hover{
- transform:translateY(-5px);
- border-color:var(--orange);
- box-shadow:0 5px 15px rgba(40,84,119,0.12);
+ transform:translateY(-6px);
+ border-color:var(--blue-dark);
+ box-shadow:0 10px 24px rgba(40,84,119,0.15);
 }
 
 #home .age-card .visual{
  width:100%;
- height:140px;
- font-size:68px;
- margin-bottom:15px;
- border-radius:16px;
+ height:170px;
+ font-size:90px;
+ margin-bottom:18px;
+ border-radius:18px;
+ background:var(--blue-light);
 }
 
 #home .age-card b{
- font-size:23px;
+ font-size:30px;
  color:var(--blue-dark);
-}
-
-.age-card button{
- margin-top:5px;
 }
 
 .back-button{
@@ -212,7 +222,7 @@ button.secondary{
 
 .stage-button{
  background:var(--blue-light);
- color:var(--blue);
+ color:var(--blue-dark);
 }
 
 .stage-button.selected{
@@ -300,18 +310,56 @@ footer{
  padding:20px;
 }
 
+/* 電腦版 */
 @media(min-width:700px){
  .grid{grid-template-columns:repeat(4,1fr)}
  .hero{padding:48px}
  .hero h1{font-size:40px}
 
+ #home{
+  min-height:calc(100vh - 170px);
+ }
+
+ #home .grid{
+  max-width:800px;
+  gap:30px;
+ }
+
  #home .age-card{
-  min-height:250px;
+  min-height:310px;
  }
 
  #home .age-card .visual{
-  height:160px;
-  font-size:78px;
+  height:190px;
+  font-size:100px;
+ }
+}
+
+/* 手機版 */
+@media(max-width:480px){
+ main{
+  padding-left:14px;
+  padding-right:14px;
+ }
+
+ #home .grid{
+  gap:14px;
+ }
+
+ #home .age-card{
+  min-height:210px;
+  padding:14px 10px;
+  border-radius:18px;
+ }
+
+ #home .age-card .visual{
+  height:125px;
+  font-size:68px;
+  margin-bottom:12px;
+ }
+
+ #home .age-card b{
+  font-size:23px;
  }
 }
 </style>
@@ -589,14 +637,12 @@ function showProducts(age){
  document.getElementById('stageTitle').textContent=age+'階段';
  document.getElementById('stageDesc').textContent=data.desc;
 
- // 更新年齡按鈕顏色
  document.querySelectorAll('.stage-button').forEach(btn=>{
   btn.classList.remove('selected');
  });
 
  document.getElementById('btn-'+age).classList.add('selected');
 
- // 顯示產品卡片
  const list=document.getElementById('productList');
  list.innerHTML='';
 
