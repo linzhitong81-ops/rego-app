@@ -7,477 +7,410 @@
 <title>REGO 全齡模組化生活</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 :root {
-  --blue: #87CEEB;
-  --blue-dark: #4D9DBF;
-  --blue-light: #DDF3FC;
-  --orange: #f29a38;
-  --orange-light: #fff1df;
-  --bg: #F3F8FC;
-  --text: #263b4b;
-  --muted: #788895;
-  --white: #ffffff;
+  --blue:#87CEEB;
+  --blue-dark:#4D9DBF;
+  --blue-light:#DDF3FC;
+  --orange:#f29a38;
+  --orange-light:#fff1df;
+  --bg:#F3F8FC;
+  --text:#263b4b;
+  --muted:#788895;
+  --white:#ffffff;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, "Noto Sans TC", sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  margin:0;
+  font-family:Arial,"Noto Sans TC",sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
 header {
-  background: var(--blue);
-  color: white;
-  text-align: center;
-  padding: 18px;
+  background:var(--blue);
+  color:white;
+  text-align:center;
+  padding:18px;
 }
 
 .logo {
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 3px;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:3px;
 }
 
 .tagline {
-  font-size: 13px;
-  margin-top: 4px;
+  font-size:13px;
+  margin-top:4px;
 }
 
 .page {
-  display: none;
-  min-height: calc(100vh - 90px);
-  padding: 20px;
+  display:none;
+  min-height:calc(100vh - 90px);
+  padding:20px;
 }
 
-.page.active {
-  display: block;
-}
+.page.active { display:block; }
 
-/* 首頁 */
 .home-title {
-  text-align: center;
-  font-size: 20px;
-  margin: 10px 0 20px;
+  text-align:center;
+  font-size:20px;
+  margin:10px 0 20px;
 }
 
 .age-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  max-width: 650px;
-  margin: 0 auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  max-width:650px;
+  margin:auto;
 }
 
 .age-card {
-  background: white;
-  border-radius: 22px;
-  padding: 22px 12px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: 0.2s;
+  background:white;
+  border-radius:22px;
+  padding:22px 12px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.age-card:active,
-.product-card:active,
-.feature-card:active {
-  transform: scale(0.97);
-}
+.age-card:nth-child(odd) { border-color:var(--blue-light); }
+.age-card:nth-child(even) { border-color:var(--orange-light); }
 
-.age-card:nth-child(odd) {
-  border-color: var(--blue-light);
-}
+.age-icon { font-size:60px; margin-bottom:8px; }
+.age-card h2 { font-size:21px; margin:5px 0; }
 
-.age-card:nth-child(even) {
-  border-color: var(--orange-light);
-}
-
-.age-icon {
-  font-size: 60px;
-  margin-bottom: 8px;
-}
-
-.age-card h2 {
-  font-size: 21px;
-  margin: 5px 0;
-}
-
-/* 按鈕 */
 .back-button {
-  border: none;
-  background: var(--blue-light);
-  color: var(--blue-dark);
-  padding: 10px 18px;
-  border-radius: 20px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 15px;
+  border:none;
+  background:var(--blue-light);
+  color:var(--blue-dark);
+  padding:10px 18px;
+  border-radius:20px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-bottom:15px;
 }
 
-/* 產品頁 */
 .products-heading {
-  text-align: center;
-  margin: 5px 0 15px;
+  text-align:center;
+  margin:5px 0 15px;
 }
 
-.products-heading h1 {
-  margin: 5px 0;
-  font-size: 25px;
-}
+.products-heading h1 { margin:5px 0; font-size:25px; }
 
 .products-heading p {
-  color: var(--muted);
-  font-size: 14px;
-  margin: 5px 0 15px;
+  color:var(--muted);
+  font-size:14px;
+  margin:5px 0 15px;
 }
 
 .age-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
 }
 
 .age-tabs button {
-  border: none;
-  background: white;
-  color: var(--text);
-  padding: 10px 15px;
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
+  border:none;
+  background:white;
+  color:var(--text);
+  padding:10px 15px;
+  border-radius:20px;
+  font-size:14px;
+  cursor:pointer;
 }
 
 .age-tabs button.active {
-  background: var(--blue);
-  color: white;
-  font-weight: bold;
+  background:var(--blue);
+  color:white;
+  font-weight:bold;
 }
 
-.age-tabs button:nth-child(even).active {
-  background: var(--orange);
-}
+.age-tabs button:nth-child(even).active { background:var(--orange); }
 
 .stage-title {
-  text-align: center;
-  margin: 10px 0 5px;
-  font-size: 23px;
+  text-align:center;
+  margin:10px 0 5px;
+  font-size:23px;
 }
 
 .stage-desc {
-  text-align: center;
-  color: var(--muted);
-  font-size: 14px;
-  margin: 5px 0 18px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  margin:5px 0 18px;
 }
 
 .product-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  max-width: 800px;
-  margin: 0 auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  max-width:800px;
+  margin:auto;
 }
 
 .product-card {
-  background: white;
-  border-radius: 18px;
-  padding: 20px 12px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  cursor: pointer;
-  transition: 0.2s;
+  background:white;
+  border-radius:18px;
+  padding:20px 12px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+  cursor:pointer;
 }
 
-.product-icon {
-  font-size: 48px;
-  margin-bottom: 8px;
-}
-
-.product-card h3 {
-  margin: 5px 0;
-  font-size: 18px;
-}
+.product-icon { font-size:48px; margin-bottom:8px; }
+.product-card h3 { margin:5px 0; font-size:18px; }
 
 .product-card p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 8px 0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+  margin:8px 0;
 }
 
 .product-label {
-  display: inline-block;
-  background: var(--blue-light);
-  color: var(--blue-dark);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.product-card:nth-child(even) .product-label {
-  background: var(--orange-light);
-  color: #bd7625;
+  display:inline-block;
+  background:var(--blue-light);
+  color:var(--blue-dark);
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  margin-top:5px;
 }
 
 /* 搖搖馬專區 */
 .feature-heading {
-  text-align: center;
-  margin: 10px 0 25px;
+  text-align:center;
+  margin:10px 0 25px;
 }
 
-.feature-heading .big-icon {
-  font-size: 75px;
-}
-
-.feature-heading h1 {
-  margin: 8px 0;
-  font-size: 26px;
-}
+.feature-heading .big-icon { font-size:75px; }
+.feature-heading h1 { margin:8px 0; font-size:26px; }
 
 .feature-heading p {
-  color: var(--muted);
-  font-size: 14px;
+  color:var(--muted);
+  font-size:14px;
 }
 
 .feature-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  max-width: 650px;
-  margin: 0 auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  max-width:650px;
+  margin:auto;
 }
 
 .feature-card {
-  background: white;
-  border-radius: 22px;
-  padding: 28px 12px;
-  text-align: center;
-  cursor: pointer;
-  border: 2px solid var(--blue-light);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: 0.2s;
+  background:white;
+  border-radius:22px;
+  padding:28px 12px;
+  text-align:center;
+  cursor:pointer;
+  border:2px solid var(--blue-light);
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
 }
 
-.feature-card:nth-child(even) {
-  border-color: var(--orange-light);
-}
-
-.feature-icon {
-  font-size: 55px;
-}
-
-.feature-card h2 {
-  font-size: 20px;
-  margin: 12px 0 5px;
-}
+.feature-card:nth-child(even) { border-color:var(--orange-light); }
+.feature-icon { font-size:55px; }
+.feature-card h2 { font-size:20px; margin:12px 0 5px; }
 
 .feature-card p {
-  color: var(--muted);
-  font-size: 13px;
+  color:var(--muted);
+  font-size:13px;
 }
 
-/* 兒歌列表 */
+/* 兒歌 */
 .content-title {
-  text-align: center;
-  font-size: 24px;
-  margin: 10px 0 20px;
+  text-align:center;
+  font-size:24px;
+  margin:10px 0 20px;
 }
 
 .song-list {
-  max-width: 650px;
-  margin: auto;
+  max-width:650px;
+  margin:auto;
 }
 
 .song-card {
-  background: white;
-  padding: 17px;
-  border-radius: 16px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  background:white;
+  padding:17px;
+  border-radius:16px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.song-info {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
-.song-icon {
-  font-size: 35px;
-}
-
-.song-info h3 {
-  margin: 0 0 5px;
-  font-size: 17px;
-}
+.song-info { display:flex; align-items:center; gap:13px; }
+.song-icon { font-size:35px; }
+.song-info h3 { margin:0 0 5px; font-size:17px; }
 
 .song-info p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
 }
 
 .song-button {
-  border: none;
-  background: var(--blue-light);
-  color: var(--blue-dark);
-  padding: 10px 14px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  white-space: nowrap;
+  border:none;
+  background:var(--blue-light);
+  color:var(--blue-dark);
+  padding:10px 14px;
+  border-radius:20px;
+  font-weight:bold;
+  cursor:pointer;
+  white-space:nowrap;
 }
 
 /* 繪本列表 */
 .book-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  max-width: 650px;
-  margin: auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  max-width:700px;
+  margin:auto;
 }
 
 .book-card {
-  background: white;
-  border-radius: 18px;
-  padding: 18px 12px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  background:white;
+  border-radius:18px;
+  padding:15px 12px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
 }
 
 .book-cover {
-  height: 130px;
-  border-radius: 14px;
-  background: var(--blue-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 65px;
-  margin-bottom: 12px;
+  height:130px;
+  border-radius:14px;
+  background:var(--blue-light);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:65px;
+  margin-bottom:12px;
 }
 
-.book-card:nth-child(even) .book-cover {
-  background: var(--orange-light);
-}
-
-.book-card h3 {
-  margin: 5px 0;
-  font-size: 17px;
-}
+.book-card:nth-child(even) .book-cover { background:var(--orange-light); }
+.book-card h3 { margin:5px 0; font-size:17px; }
 
 .book-card p {
-  color: var(--muted);
-  font-size: 12px;
+  color:var(--muted);
+  font-size:12px;
 }
 
-/* 閱讀故事 */
+/* 故事閱讀 */
 .story-container {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  border-radius: 22px;
-  padding: 22px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width:600px;
+  margin:auto;
+  background:white;
+  border-radius:22px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
 }
 
 .story-picture {
-  background: var(--blue-light);
-  border-radius: 18px;
-  padding: 35px 10px;
-  font-size: 85px;
-  margin-bottom: 20px;
+  background:var(--blue-light);
+  border-radius:18px;
+  padding:30px 10px;
+  font-size:85px;
+  margin-bottom:18px;
 }
 
-.story-container h2 {
-  font-size: 23px;
-}
+.story-container h2 { font-size:23px; }
 
 .story-text {
-  font-size: 17px;
-  line-height: 2;
-  min-height: 110px;
-  text-align: left;
-  white-space: pre-line;
+  font-size:17px;
+  line-height:2;
+  min-height:110px;
+  text-align:left;
+  white-space:pre-line;
 }
 
 .story-controls {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 20px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:18px;
 }
 
 .story-controls button {
-  border: none;
-  background: var(--blue);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 25px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
+  border:none;
+  background:var(--blue);
+  color:white;
+  padding:12px 18px;
+  border-radius:25px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.story-controls button:last-child {
-  background: var(--orange);
-}
+.story-controls button:last-child { background:var(--orange); }
 
 .story-page-number {
-  color: var(--muted);
-  font-size: 13px;
-  margin-top: 15px;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:15px;
 }
 
-@media (max-width: 480px) {
-  .page {
-    padding: 15px;
-  }
+/* 語音控制 */
+.audio-controls {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:9px;
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid #edf1f4;
+}
 
-  .age-grid,
-  .feature-grid {
-    gap: 12px;
-  }
+.audio-controls button {
+  border:none;
+  border-radius:22px;
+  padding:12px 17px;
+  background:var(--blue-light);
+  color:var(--blue-dark);
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-  .age-card {
-    padding: 20px 8px;
-  }
+.audio-controls .play-button {
+  background:var(--orange);
+  color:white;
+}
 
-  .age-icon {
-    font-size: 50px;
-  }
+.audio-status {
+  color:var(--muted);
+  font-size:13px;
+  margin-top:12px;
+  min-height:20px;
+}
 
-  .age-card h2 {
-    font-size: 18px;
-  }
+button:disabled {
+  opacity:.4;
+  cursor:not-allowed;
+}
 
-  .product-list,
-  .book-list {
-    gap: 10px;
-  }
-
-  .product-card {
-    padding: 16px 8px;
-  }
-
-  .book-cover {
-    height: 105px;
-    font-size: 55px;
-  }
+@media(max-width:480px) {
+  .page { padding:15px; }
+  .age-grid,.feature-grid { gap:12px; }
+  .age-card { padding:20px 8px; }
+  .age-icon { font-size:50px; }
+  .age-card h2 { font-size:18px; }
+  .product-list,.book-list { gap:10px; }
+  .product-card { padding:16px 8px; }
+  .book-cover { height:105px; font-size:55px; }
 }
 </style>
 </head>
@@ -491,11 +424,9 @@ header {
 
 <!-- 首頁 -->
 <section id="home" class="page active">
-
   <div class="home-title">選擇你的年齡階段</div>
 
   <div class="age-grid">
-
     <div class="age-card" onclick="openAge('child')">
       <div class="age-icon">🧸</div>
       <h2>兒童</h2>
@@ -515,16 +446,12 @@ header {
       <div class="age-icon">🚶</div>
       <h2>老年</h2>
     </div>
-
   </div>
 </section>
 
 <!-- 產品頁 -->
 <section id="products" class="page">
-
-  <button class="back-button" onclick="showPage('home')">
-    ← 返回首頁
-  </button>
+  <button class="back-button" onclick="showPage('home')">← 返回首頁</button>
 
   <div class="products-heading">
     <h1>REGO 產品介紹</h1>
@@ -540,17 +467,12 @@ header {
 
   <h2 class="stage-title" id="stageTitle"></h2>
   <p class="stage-desc" id="stageDesc"></p>
-
   <div class="product-list" id="productList"></div>
-
 </section>
 
 <!-- 搖搖馬專區 -->
 <section id="rocking" class="page">
-
-  <button class="back-button" onclick="showPage('products')">
-    ← 返回兒童產品
-  </button>
+  <button class="back-button" onclick="showPage('products')">← 返回兒童產品</button>
 
   <div class="feature-heading">
     <div class="big-icon">🧸</div>
@@ -559,7 +481,6 @@ header {
   </div>
 
   <div class="feature-grid">
-
     <div class="feature-card" onclick="showPage('songs')">
       <div class="feature-icon">🎵</div>
       <h2>兒歌天地</h2>
@@ -569,30 +490,21 @@ header {
     <div class="feature-card" onclick="showPage('books')">
       <div class="feature-icon">📚</div>
       <h2>故事繪本</h2>
-      <p>進入有趣的故事世界</p>
+      <p>看故事，也可以聽故事</p>
     </div>
-
   </div>
 </section>
 
 <!-- 兒歌頁 -->
 <section id="songs" class="page">
-
-  <button class="back-button" onclick="showPage('rocking')">
-    ← 返回搖搖馬
-  </button>
-
+  <button class="back-button" onclick="showPage('rocking')">← 返回搖搖馬</button>
   <h1 class="content-title">🎵 兒歌天地</h1>
 
   <div class="song-list">
-
     <div class="song-card">
       <div class="song-info">
         <div class="song-icon">⭐</div>
-        <div>
-          <h3>小星星</h3>
-          <p>經典童謠・認識夜空</p>
-        </div>
+        <div><h3>小星星</h3><p>經典童謠</p></div>
       </div>
       <button class="song-button" onclick="searchSong('小星星 兒歌')">聽兒歌</button>
     </div>
@@ -600,10 +512,7 @@ header {
     <div class="song-card">
       <div class="song-info">
         <div class="song-icon">🐯</div>
-        <div>
-          <h3>兩隻老虎</h3>
-          <p>經典童謠・跟著節奏唱</p>
-        </div>
+        <div><h3>兩隻老虎</h3><p>經典童謠</p></div>
       </div>
       <button class="song-button" onclick="searchSong('兩隻老虎 兒歌')">聽兒歌</button>
     </div>
@@ -611,10 +520,7 @@ header {
     <div class="song-card">
       <div class="song-info">
         <div class="song-icon">🥕</div>
-        <div>
-          <h3>拔蘿蔔</h3>
-          <p>趣味童謠・一起來幫忙</p>
-        </div>
+        <div><h3>拔蘿蔔</h3><p>趣味童謠</p></div>
       </div>
       <button class="song-button" onclick="searchSong('拔蘿蔔 兒歌')">聽兒歌</button>
     </div>
@@ -622,49 +528,24 @@ header {
     <div class="song-card">
       <div class="song-info">
         <div class="song-icon">🚌</div>
-        <div>
-          <h3>公車來了</h3>
-          <p>交通主題・認識生活</p>
-        </div>
+        <div><h3>公車來了</h3><p>生活主題兒歌</p></div>
       </div>
       <button class="song-button" onclick="searchSong('公車 兒歌')">聽兒歌</button>
     </div>
-
   </div>
 </section>
 
 <!-- 繪本列表 -->
 <section id="books" class="page">
-
-  <button class="back-button" onclick="showPage('rocking')">
-    ← 返回搖搖馬
-  </button>
-
+  <button class="back-button" onclick="stopStory();showPage('rocking')">← 返回搖搖馬</button>
   <h1 class="content-title">📚 故事繪本</h1>
 
-  <div class="book-list">
-
-    <div class="book-card" onclick="openStory('forest')">
-      <div class="book-cover">🐰</div>
-      <h3>小兔子的冒險</h3>
-      <p>一場森林探索之旅</p>
-    </div>
-
-    <div class="book-card" onclick="openStory('star')">
-      <div class="book-cover">⭐</div>
-      <h3>找星星的小熊</h3>
-      <p>關於勇氣與友誼的故事</p>
-    </div>
-
-  </div>
+  <div class="book-list" id="bookList"></div>
 </section>
 
 <!-- 故事閱讀頁 -->
 <section id="story" class="page">
-
-  <button class="back-button" onclick="showPage('books')">
-    ← 返回繪本列表
-  </button>
+  <button class="back-button" onclick="stopStory();showPage('books')">← 返回繪本列表</button>
 
   <div class="story-container">
     <div class="story-picture" id="storyPicture">🐰</div>
@@ -672,97 +553,149 @@ header {
     <div class="story-text" id="storyText"></div>
 
     <div class="story-controls">
-      <button onclick="changeStoryPage(-1)">上一頁</button>
-      <button onclick="changeStoryPage(1)">下一頁</button>
+      <button id="prevPage" onclick="changeStoryPage(-1)">上一頁</button>
+      <button id="nextPage" onclick="changeStoryPage(1)">下一頁</button>
     </div>
 
     <div class="story-page-number" id="storyPageNumber"></div>
+
+    <div class="audio-controls">
+      <button class="play-button" onclick="playStory()">▶ 播放故事</button>
+      <button onclick="pauseStory()">⏸ 暫停</button>
+      <button onclick="resumeStory()">▶ 繼續</button>
+      <button onclick="stopStory()">■ 停止</button>
+    </div>
+
+    <div class="audio-status" id="audioStatus">按下播放故事，就可以開始聆聽囉！</div>
   </div>
 </section>
 
 <script>
 const products = {
   child: {
-    title: "兒童階段",
-    desc: "陪伴孩子探索世界，從遊戲中培養平衡與活動能力。",
-    items: [
-      {
-        icon: "🧸",
-        name: "搖搖馬",
-        desc: "透過前後搖動，享受遊戲樂趣。",
-        action: "rocking"
-      },
-      {
-        icon: "🛴",
-        name: "滑步車",
-        desc: "幫助孩子練習平衡，探索移動的樂趣。"
-      },
-      {
-        icon: "🚗",
-        name: "兒童拖車",
-        desc: "提供不同的遊戲與移動使用方式。"
-      }
+    title:"兒童階段",
+    desc:"陪伴孩子探索世界，從遊戲中培養平衡與活動能力。",
+    items:[
+      {icon:"🧸",name:"搖搖馬",desc:"透過前後搖動，享受遊戲樂趣。",action:"rocking"},
+      {icon:"🛴",name:"滑步車",desc:"幫助孩子練習平衡，探索移動的樂趣。"},
+      {icon:"🚗",name:"兒童拖車",desc:"提供不同的遊戲與移動使用方式。"}
     ]
   },
-
   youth: {
-    title: "青年階段",
-    desc: "滿足日常移動與活動需求，讓生活更加便利。",
-    items: [
-      {
-        icon: "🚲",
-        name: "腳踏車",
-        desc: "適合日常通勤與戶外活動。"
-      },
-      {
-        icon: "🛴",
-        name: "滑板車",
-        desc: "輕巧方便，適合短距離移動。"
-      }
+    title:"青年階段",
+    desc:"滿足日常移動與活動需求，讓生活更加便利。",
+    items:[
+      {icon:"🚲",name:"腳踏車",desc:"適合日常通勤與戶外活動。"},
+      {icon:"🛴",name:"滑板車",desc:"輕巧方便，適合短距離移動。"}
     ]
   },
-
   adult: {
-    title: "壯年階段",
-    desc: "配合日常生活需求，讓移動與收納更加方便。",
-    items: [
-      {
-        icon: "🛒",
-        name: "折疊推車",
-        desc: "方便搬運物品，也能節省收納空間。"
-      }
+    title:"壯年階段",
+    desc:"配合日常生活需求，讓移動與收納更加方便。",
+    items:[
+      {icon:"🛒",name:"折疊推車",desc:"方便搬運物品，也能節省收納空間。"}
+    ]
+  },
+  senior: {
+    title:"老年階段",
+    desc:"提供生活上的輔助，讓日常活動更加便利。",
+    items:[
+      {icon:"🛒",name:"買菜車",desc:"方便外出購物與攜帶日常用品。"},
+      {icon:"🚶",name:"助行器",desc:"提供行走時的支撐與輔助。"}
+    ]
+  }
+};
+
+/* 故事資料：6 本原創繪本 */
+const stories = {
+  forest: {
+    title:"小兔子的森林冒險",
+    cover:"🐰",
+    description:"小兔子第一次探索森林的故事",
+    pages:[
+      {picture:"🐰🌳",text:"在一座美麗的森林裡，住著一隻喜歡冒險的小兔子。一天早上，牠背起小背包，準備出門探索森林。"},
+      {picture:"🐰🦋",text:"走著走著，小兔子遇見一隻漂亮的蝴蝶。蝴蝶說：「你好呀！要不要和我一起去看花海？」"},
+      {picture:"🐰🌼",text:"牠們來到一片開滿花朵的草地。紅色、黃色、紫色的花朵，讓小兔子看得目不轉睛。"},
+      {picture:"🐰🐿️",text:"這時，一隻小松鼠跑了過來。牠們一起分享點心，還玩了好多有趣的遊戲。"},
+      {picture:"🌈🐰",text:"回家的路上，天空出現了一道彩虹。小兔子開心地想著，今天真是充滿驚喜的一天！"}
     ]
   },
 
-  senior: {
-    title: "老年階段",
-    desc: "提供生活上的輔助，讓日常活動更加便利。",
-    items: [
-      {
-        icon: "🛒",
-        name: "買菜車",
-        desc: "方便外出購物與攜帶日常用品。"
-      },
-      {
-        icon: "🚶",
-        name: "助行器",
-        desc: "提供行走時的支撐與輔助。"
-      }
+  star: {
+    title:"找星星的小熊",
+    cover:"⭐",
+    description:"一場溫暖的星空小旅行",
+    pages:[
+      {picture:"🐻🌙",text:"夜晚到了，小熊坐在窗邊，看著天空中的星星。牠最喜歡數星星，今天卻發現少了一顆。"},
+      {picture:"🐻🔦",text:"小熊帶著小燈出門，決定找找那顆不見的星星。牠走過草地，遇見了小狐狸。"},
+      {picture:"🦊🐻",text:"小狐狸問：「你在找什麼呀？」小熊說：「我在找一顆星星！」小狐狸便陪牠一起尋找。"},
+      {picture:"☁️⭐",text:"牠們抬頭一看，原來星星被雲朵遮住了。微風吹過，雲朵慢慢散開，星星又出現了。"},
+      {picture:"🐻❤️",text:"小熊開心地笑了。牠發現，有朋友陪伴的夜晚，就像星星一樣閃閃發亮。"}
+    ]
+  },
+
+  ocean: {
+    title:"小魚的海洋旅行",
+    cover:"🐠",
+    description:"跟著小魚認識海洋世界",
+    pages:[
+      {picture:"🐠🌊",text:"藍藍的大海裡，住著一隻好奇的小魚。牠每天都想看看海洋裡還有什麼新奇的事物。"},
+      {picture:"🐠🐢",text:"有一天，小魚遇見一隻海龜。海龜說：「我知道一個很漂亮的珊瑚花園！」"},
+      {picture:"🪸🐟",text:"珊瑚花園裡有好多不同顏色的珊瑚，還有許多小魚在裡面快樂地游來游去。"},
+      {picture:"🐙🐠",text:"小魚又遇見了章魚朋友。章魚揮揮觸手，邀請小魚一起玩捉迷藏。"},
+      {picture:"🐠💙",text:"太陽慢慢下山，小魚向新朋友道別。牠期待明天還能有更多有趣的海洋冒險。"}
+    ]
+  },
+
+  dinosaur: {
+    title:"恐龍小小探險家",
+    cover:"🦕",
+    description:"和小恐龍一起認識世界",
+    pages:[
+      {picture:"🦕🌿",text:"很久很久以前，有一隻小恐龍住在綠色的森林裡。牠最喜歡探索新地方。"},
+      {picture:"🦕🥚",text:"一天，小恐龍在草叢裡發現了一顆蛋。牠好奇地靠近，想知道裡面住著誰。"},
+      {picture:"🐣🦕",text:"突然，蛋殼慢慢裂開，一隻小恐龍探出頭來。原來牠遇見了一位新朋友！"},
+      {picture:"🦕🌳",text:"兩隻小恐龍一起走過森林，認識了高高的樹木和各種有趣的植物。"},
+      {picture:"🦕❤️",text:"天黑了，牠們一起回到森林裡休息。從此以後，牠們成為最好的探險夥伴。"}
+    ]
+  },
+
+  seed: {
+    title:"小種子的願望",
+    cover:"🌱",
+    description:"看看一顆種子如何慢慢長大",
+    pages:[
+      {picture:"🌰🌱",text:"泥土裡住著一顆小種子。牠每天都在想：「我什麼時候才能看看外面的世界呢？」"},
+      {picture:"🌧️🌰",text:"有一天，下了一場溫柔的雨。雨水流進泥土裡，小種子喝得飽飽的。"},
+      {picture:"🌱☀️",text:"溫暖的陽光照進土壤，小種子慢慢長出了小小的嫩芽。"},
+      {picture:"🌿🦋",text:"日子一天一天過去，嫩芽長成了綠色的小植物，還吸引了蝴蝶來做客。"},
+      {picture:"🌻🌞",text:"最後，小植物開出了一朵漂亮的花。小種子終於實現了自己的願望！"}
+    ]
+  },
+
+  kindness: {
+    title:"分享快樂的小熊",
+    cover:"🐻",
+    description:"學習分享與關心朋友",
+    pages:[
+      {picture:"🐻🍎",text:"小熊今天帶了一個大大的蘋果到公園。牠很開心，準備自己慢慢享用。"},
+      {picture:"🐰🍎",text:"小兔子走過來，看起來有一點餓。小熊想了想，決定把蘋果分給小兔子。"},
+      {picture:"🐿️🍎",text:"接著，小松鼠也加入了牠們。大家一起把蘋果切成小塊，開心地分享。"},
+      {picture:"🐻🐰🐿️",text:"吃完點心後，牠們一起玩遊戲、說故事，笑聲傳遍了整座公園。"},
+      {picture:"❤️🐻",text:"小熊發現，原來分享不會讓快樂變少，反而能讓更多朋友一起開心。"}
     ]
   }
 };
 
 function showPage(id) {
+  stopSpeechOnly();
+
   document.querySelectorAll(".page").forEach(page => {
     page.classList.remove("active");
   });
 
   document.getElementById(id).classList.add("active");
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function openAge(age) {
@@ -784,14 +717,23 @@ function openAge(age) {
     const card = document.createElement("div");
     card.className = "product-card";
 
-    card.innerHTML = `
-      <div class="product-icon">${item.icon}</div>
-      <h3>${item.name}</h3>
-      <p>${item.desc}</p>
-      <span class="product-label">REGO 全齡產品</span>
-    `;
+    const icon = document.createElement("div");
+    icon.className = "product-icon";
+    icon.textContent = item.icon;
 
-    if (item.action) {
+    const name = document.createElement("h3");
+    name.textContent = item.name;
+
+    const desc = document.createElement("p");
+    desc.textContent = item.desc;
+
+    const label = document.createElement("span");
+    label.className = "product-label";
+    label.textContent = "REGO 全齡產品";
+
+    card.append(icon,name,desc,label);
+
+    if(item.action) {
       card.onclick = () => showPage(item.action);
     }
 
@@ -803,69 +745,45 @@ function openAge(age) {
 
 /* 兒歌搜尋 */
 function searchSong(song) {
-  const url = "https://www.youtube.com/results?search_query=" + encodeURIComponent(song);
-  window.open(url, "_blank");
+  const url = "https://www.youtube.com/results?search_query=" +
+    encodeURIComponent(song + " 兒歌");
+  window.open(url,"_blank");
 }
 
-/* 原創繪本故事 */
-const stories = {
-  forest: {
-    title: "小兔子的冒險",
-    pages: [
-      {
-        picture: "🐰🌳",
-        text: "在一座美麗的森林裡，住著一隻喜歡冒險的小兔子。\n有一天，牠決定出門探索森林。"
-      },
-      {
-        picture: "🐰🦋",
-        text: "走著走著，小兔子遇見了一隻漂亮的蝴蝶。\n蝴蝶說：「你好呀！你要去哪裡呢？」"
-      },
-      {
-        picture: "🐰🐿️",
-        text: "小兔子說：「我想去看看森林的另一邊！」\n這時，一隻小松鼠也加入了牠的旅程。"
-      },
-      {
-        picture: "🌈🐰",
-        text: "牠們一起走過小溪、爬過小山，最後看見了一道美麗的彩虹。\n小兔子開心地說：「原來和朋友一起冒險這麼有趣！」"
-      },
-      {
-        picture: "🐰❤️",
-        text: "從那天開始，小兔子和朋友們經常一起探索森林。\n每一天，都有新的驚喜等著牠們！"
-      }
-    ]
-  },
+/* 建立繪本卡片 */
+function renderBooks() {
+  const list = document.getElementById("bookList");
+  list.innerHTML = "";
 
-  star: {
-    title: "找星星的小熊",
-    pages: [
-      {
-        picture: "🐻🌙",
-        text: "夜晚到了，小熊坐在窗邊，看著天空中的星星。\n牠發現有一顆星星好像不見了。"
-      },
-      {
-        picture: "🐻✨",
-        text: "小熊決定出門尋找星星。\n牠走過草地，遇見了正在散步的小狐狸。"
-      },
-      {
-        picture: "🦊🐻",
-        text: "小狐狸問：「你在找什麼呀？」\n小熊回答：「我在找那顆不見的星星！」\n於是小狐狸決定陪牠一起找。"
-      },
-      {
-        picture: "🐻⭐",
-        text: "牠們抬頭一看，發現星星其實一直都在天空中。\n只是被一大片雲朵遮住了。"
-      },
-      {
-        picture: "🐻🦊❤️",
-        text: "小熊開心地笑了。\n牠明白了，有朋友陪伴的夜晚，就像星星一樣閃閃發亮。"
-      }
-    ]
-  }
-};
+  Object.entries(stories).forEach(([key,story]) => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+
+    const cover = document.createElement("div");
+    cover.className = "book-cover";
+    cover.textContent = story.cover;
+
+    const title = document.createElement("h3");
+    title.textContent = story.title;
+
+    const desc = document.createElement("p");
+    desc.textContent = story.description;
+
+    card.append(cover,title,desc);
+    card.onclick = () => openStory(key);
+
+    list.appendChild(card);
+  });
+}
 
 let currentStory = "";
 let currentStoryPage = 0;
+let speechItems = [];
+let speechIndex = 0;
+let speechMode = "stopped";
 
 function openStory(name) {
+  stopSpeechOnly();
   currentStory = name;
   currentStoryPage = 0;
   showStoryContent();
@@ -883,30 +801,141 @@ function showStoryContent() {
   document.getElementById("storyPageNumber").textContent =
     "第 " + (currentStoryPage + 1) + " / " + story.pages.length + " 頁";
 
-  const buttons = document.querySelectorAll(".story-controls button");
-  buttons[0].disabled = currentStoryPage === 0;
-  buttons[1].disabled = currentStoryPage === story.pages.length - 1;
-
-  buttons[0].style.opacity = currentStoryPage === 0 ? "0.4" : "1";
-  buttons[1].style.opacity = currentStoryPage === story.pages.length - 1 ? "0.4" : "1";
+  document.getElementById("prevPage").disabled = currentStoryPage === 0;
+  document.getElementById("nextPage").disabled =
+    currentStoryPage === story.pages.length - 1;
 }
 
 function changeStoryPage(direction) {
-  const story = stories[currentStory];
+  stopSpeechOnly();
 
+  const story = stories[currentStory];
   currentStoryPage += direction;
 
-  if (currentStoryPage < 0) {
-    currentStoryPage = 0;
-  }
-
-  if (currentStoryPage >= story.pages.length) {
-    currentStoryPage = story.pages.length - 1;
-  }
+  currentStoryPage = Math.max(
+    0,
+    Math.min(currentStoryPage,story.pages.length - 1)
+  );
 
   showStoryContent();
+  setAudioStatus("已切換故事頁面，按播放即可繼續聆聽。");
 }
+
+function setAudioStatus(message) {
+  document.getElementById("audioStatus").textContent = message;
+}
+
+function getChineseVoice() {
+  const voices = speechSynthesis.getVoices();
+
+  return voices.find(v => v.lang === "zh-TW") ||
+         voices.find(v => v.lang.startsWith("zh")) ||
+         null;
+}
+
+function playStory() {
+  if(!("speechSynthesis" in window)) {
+    setAudioStatus("目前瀏覽器不支援語音朗讀，請改用其他瀏覽器。");
+    return;
+  }
+
+  stopSpeechOnly();
+
+  const story = stories[currentStory];
+  speechItems = story.pages.map(page => page.text);
+  speechIndex = currentStoryPage;
+  speechMode = "playing";
+
+  speakCurrentPage();
+}
+
+function speakCurrentPage() {
+  if(speechMode !== "playing") return;
+
+  if(speechIndex >= speechItems.length) {
+    speechMode = "stopped";
+    setAudioStatus("故事播放完成！謝謝你的聆聽。");
+    return;
+  }
+
+  currentStoryPage = speechIndex;
+  showStoryContent();
+
+  const utterance = new SpeechSynthesisUtterance(
+    speechItems[speechIndex]
+  );
+
+  const voice = getChineseVoice();
+
+  if(voice) utterance.voice = voice;
+
+  utterance.lang = voice ? voice.lang : "zh-TW";
+  utterance.rate = 0.9;
+  utterance.pitch = 1.05;
+
+  utterance.onend = () => {
+    if(speechMode !== "playing") return;
+
+    speechIndex++;
+
+    if(speechIndex < speechItems.length) {
+      speakCurrentPage();
+    } else {
+      speechMode = "stopped";
+      setAudioStatus("故事播放完成！謝謝你的聆聽。");
+    }
+  };
+
+  utterance.onerror = () => {
+    if(speechMode === "playing") {
+      speechMode = "stopped";
+      setAudioStatus("語音播放遇到問題，請再試一次。");
+    }
+  };
+
+  setAudioStatus("正在朗讀故事……");
+  speechSynthesis.speak(utterance);
+}
+
+function pauseStory() {
+  if(!("speechSynthesis" in window)) return;
+
+  if(speechSynthesis.speaking && !speechSynthesis.paused) {
+    speechSynthesis.pause();
+    speechMode = "paused";
+    setAudioStatus("故事已暫停。");
+  }
+}
+
+function resumeStory() {
+  if(!("speechSynthesis" in window)) return;
+
+  if(speechSynthesis.paused) {
+    speechSynthesis.resume();
+    speechMode = "playing";
+    setAudioStatus("繼續播放故事……");
+  } else if(speechMode === "stopped") {
+    playStory();
+  }
+}
+
+function stopSpeechOnly() {
+  if("speechSynthesis" in window) {
+    speechSynthesis.cancel();
+  }
+
+  speechMode = "stopped";
+}
+
+function stopStory() {
+  stopSpeechOnly();
+  setAudioStatus("故事已停止。");
+}
+
+/* 載入繪本 */
+renderBooks();
 </script>
 
 </body>
 </html>
+
