@@ -6,257 +6,212 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>REGO 全齡模組化生活</title>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
 <style>
 :root{
- --blue:#87CEEB;
- --blue-dark:#4D9DBF;
- --blue-light:#DDF3FC;
- --orange:#f29a38;
- --orange-light:#fff1df;
- --bg:#F3F8FC;
- --text:#263b4b;
- --white:#ffffff;
+  --blue:#87CEEB;
+  --blue-dark:#4D9DBF;
+  --blue-light:#DDF3FC;
+  --orange:#f29a38;
+  --orange-light:#fff1df;
+  --bg:#F3F8FC;
+  --text:#263b4b;
+  --white:#ffffff;
+  --green:#8cc99a;
+  --red:#ef7777;
 }
-
 *{box-sizing:border-box}
-
 body{
- margin:0;
- font-family:Arial,"Noto Sans TC",sans-serif;
- background:var(--bg);
- color:var(--text);
+  margin:0;
+  font-family:Arial,"Noto Sans TC",sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
-
 header{
- background:var(--blue);
- padding:18px 7%;
- display:flex;
- justify-content:space-between;
- align-items:center;
+  background:var(--blue);
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-
-.logo{
- font-size:28px;
- font-weight:bold;
- letter-spacing:4px;
-}
-
-main{
- max-width:1000px;
- margin:auto;
- padding:25px 18px 50px;
-}
-
+.logo{font-size:28px;font-weight:bold;letter-spacing:4px}
+main{max-width:1000px;margin:auto;padding:25px 18px 50px}
 .page{display:none}
 .page.active{display:block}
-
 h1{font-size:28px}
 h2{font-size:24px}
 h3{font-size:18px}
-
 .grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:14px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
-
 .card{
- background:white;
- border:1px solid #e1e9ef;
- border-radius:18px;
- padding:17px;
+  background:white;
+  border:1px solid #e1e9ef;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:12px;
 }
-
 .visual{
- height:115px;
- background:var(--blue-light);
- border-radius:14px;
- display:grid;
- place-items:center;
- font-size:55px;
- margin-bottom:12px;
+  height:115px;
+  background:var(--blue-light);
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:55px;
+  margin-bottom:12px;
 }
-
 button{
- border:0;
- border-radius:12px;
- padding:12px 16px;
- background:var(--blue);
- color:#263b4b;
- font-size:14px;
- cursor:pointer;
+  border:0;
+  border-radius:12px;
+  padding:12px 16px;
+  background:var(--blue);
+  color:#263b4b;
+  font-size:14px;
+  cursor:pointer;
+  margin:3px;
 }
-
-button:hover{
- background:var(--blue-dark);
- color:white;
-}
-
-button.orange{
- background:var(--orange);
- color:#263b4b;
-}
-
+button:hover{background:var(--blue-dark);color:white}
+button.orange{background:var(--orange)}
 button.orange:hover{background:#e78925;color:white}
-
-button.secondary{
- background:var(--blue-light);
- color:var(--blue-dark);
-}
-
+button.secondary{background:var(--blue-light);color:var(--blue-dark)}
+button.green{background:#b8e2c1}
+button.red{background:#f5b5b5}
 .back-button{
- margin-bottom:18px;
- background:var(--orange);
- font-weight:bold;
+  margin-bottom:18px;
+  background:var(--orange);
+  font-weight:bold;
 }
-
-.actions{
- display:flex;
- gap:8px;
- flex-wrap:wrap;
- margin:15px 0;
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.age-card,.product-card,.story-cover{
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
 }
-
-.age-card{
- text-align:center;
- cursor:pointer;
- transition:.2s;
+.age-card:hover,.product-card:hover,.story-cover:hover{
+  transform:translateY(-3px);
+  border-color:var(--orange);
 }
-
-.age-card:hover{
- transform:translateY(-4px);
- border-color:var(--orange);
-}
-
-.age-card .visual{
- height:145px;
- font-size:65px;
-}
-
-.product-card{
- cursor:pointer;
- transition:.2s;
- text-align:center;
-}
-
-.product-card:hover{
- transform:translateY(-3px);
- border-color:var(--orange);
-}
-
+.age-card .visual{height:145px;font-size:65px}
 .product-card .visual{background:var(--orange-light)}
-
-.stage-button{
- background:var(--blue-light);
- color:var(--blue-dark);
-}
-
-.stage-button.selected{
- background:var(--orange);
- color:#263b4b;
- font-weight:bold;
-}
-
-.story-cover{
- text-align:center;
- cursor:pointer;
-}
-
+.stage-button{background:var(--blue-light);color:var(--blue-dark)}
+.stage-button.selected{background:var(--orange);font-weight:bold}
 .story-cover .visual{height:135px;font-size:65px}
-
 .story-page{
- background:#fffaf1;
- border:1px solid #f1e4d2;
- border-radius:20px;
- padding:25px 20px;
- min-height:250px;
- text-align:center;
+  background:#fffaf1;
+  border:1px solid #f1e4d2;
+  border-radius:20px;
+  padding:25px 20px;
+  min-height:250px;
+  text-align:center;
 }
-
-.story-illustration{
- font-size:65px;
- margin:10px 0 20px;
-}
-
-.story-text{
- font-size:17px;
- line-height:2.1;
- text-align:left;
- white-space:pre-line;
-}
-
+.story-illustration{font-size:65px;margin:10px 0 20px}
+.story-text{font-size:17px;line-height:2.1;text-align:left;white-space:pre-line}
 .story-controls{
- display:flex;
- justify-content:center;
- gap:9px;
- flex-wrap:wrap;
- margin-top:18px;
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:18px;
 }
-
-.voice-box{
- margin-top:20px;
- padding:18px;
- border-radius:18px;
- background:var(--blue-light);
+.voice-box,.gps-card{
+  margin-top:20px;
+  padding:18px;
+  border-radius:18px;
+  background:var(--blue-light);
 }
-
-.voice-box label{
- display:block;
- font-weight:bold;
- margin:15px 0 7px;
+.voice-box label,.form-label{
+  display:block;
+  font-weight:bold;
+  margin:15px 0 7px;
 }
-
-.voice-box select{
- width:100%;
- padding:12px;
- border:1px solid #d3e3eb;
- border-radius:10px;
- background:white;
- font-size:14px;
+.voice-box select,.form-input,select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d3e3eb;
+  border-radius:10px;
+  background:white;
+  font-size:14px;
 }
-
 .voice-box input[type=range]{width:100%;accent-color:var(--blue-dark)}
-
-.voice-status{
- margin-top:14px;
- min-height:20px;
- font-size:14px;
+.voice-status,.gps-status{margin-top:14px;line-height:1.8;font-size:14px}
+input.destination,.form-input{
+  width:100%;
+  padding:13px;
+  border:1px solid #d8e2da;
+  border-radius:12px;
+  font-size:15px;
+  margin:8px 0;
 }
-
-.song-card{text-align:center}
-.song-card .visual{font-size:50px}
-
-input.destination{
- width:100%;
- padding:14px;
- border:1px solid #d8e2da;
- border-radius:12px;
- font-size:15px;
- margin:10px 0;
+.big-number{
+  font-size:42px;
+  font-weight:bold;
+  text-align:center;
+  margin:20px 0;
 }
-
-.gps-card{
- background:var(--blue-light);
- border-radius:18px;
- padding:20px;
- margin-top:15px;
+.center{text-align:center}
+.light-box{
+  background:var(--blue-light);
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+  margin:15px 0;
 }
-
-.gps-status{
- margin-top:14px;
- line-height:1.8;
+.traffic-light{
+  background:#263b4b;
+  width:90px;
+  padding:12px;
+  border-radius:25px;
+  margin:15px auto;
 }
-
-.gps-actions{
- display:flex;
- flex-wrap:wrap;
- gap:10px;
- margin-top:15px;
+.light{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#555;
+  margin:10px auto;
 }
-
+.light.on.red-light{background:#ff4242}
+.light.on.yellow-light{background:#ffd447}
+.light.on.green-light{background:#36d477}
+#bikeMap{height:300px;border-radius:16px;margin:15px 0;z-index:1}
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.stat{
+  background:var(--blue-light);
+  border-radius:14px;
+  padding:15px;
+  text-align:center;
+}
+.stat strong{display:block;font-size:25px;margin-top:8px}
+.list-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#f5f9fc;
+  border-radius:12px;
+  padding:12px;
+  margin:8px 0;
+}
+.list-row label{flex:1}
+.list-row input{width:19px;height:19px}
+.tag{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  background:var(--orange-light);
+  margin:4px;
+}
+hr{border:0;border-top:1px solid #e3eaf0;margin:18px 0}
 @media(min-width:700px){
- .grid{grid-template-columns:repeat(4,1fr)}
- .age-card .visual{height:165px}
+  .grid{grid-template-columns:repeat(4,1fr)}
+  .age-card .visual{height:165px}
 }
 </style>
 </head>
@@ -264,840 +219,933 @@ input.destination{
 <body>
 
 <header>
- <div class="logo">REGO</div>
- <div style="font-weight:bold;letter-spacing:1px">REGO LIFE</div>
+  <div class="logo">REGO</div>
+  <div style="font-weight:bold;letter-spacing:1px">REGO LIFE</div>
 </header>
 
 <main>
 
 <!-- 首頁 -->
 <section class="page active" id="home">
-
- <h1>選擇你的年齡階段</h1>
-
- <div class="grid">
-
-  <div class="card age-card" onclick="openAge('兒童')">
-   <div class="visual">🧸</div>
-   <h3>兒童</h3>
+  <h1>選擇你的年齡階段</h1>
+  <div class="grid">
+    <div class="card age-card" onclick="openAge('兒童')">
+      <div class="visual">🧸</div><h3>兒童</h3>
+    </div>
+    <div class="card age-card" onclick="openAge('青年')">
+      <div class="visual">🚲</div><h3>青年</h3>
+    </div>
+    <div class="card age-card" onclick="openAge('壯年')">
+      <div class="visual">🛒</div><h3>壯年</h3>
+    </div>
+    <div class="card age-card" onclick="openAge('老年')">
+      <div class="visual">🚶</div><h3>老年</h3>
+    </div>
   </div>
-
-  <div class="card age-card" onclick="openAge('青年')">
-   <div class="visual">🚲</div>
-   <h3>青年</h3>
-  </div>
-
-  <div class="card age-card" onclick="openAge('壯年')">
-   <div class="visual">🛒</div>
-   <h3>壯年</h3>
-  </div>
-
-  <div class="card age-card" onclick="openAge('老年')">
-   <div class="visual">🚶</div>
-   <h3>老年</h3>
-  </div>
-
- </div>
 </section>
-
 
 <!-- 產品頁 -->
 <section class="page" id="products">
-
- <button class="back-button" onclick="showPage('home')">← 返回首頁</button>
-
- <h2>產品介紹</h2>
-
- <div class="actions">
-  <button class="stage-button selected" id="btn-兒童" onclick="showProducts('兒童')">兒童</button>
-  <button class="stage-button" id="btn-青年" onclick="showProducts('青年')">青年</button>
-  <button class="stage-button" id="btn-壯年" onclick="showProducts('壯年')">壯年</button>
-  <button class="stage-button" id="btn-老年" onclick="showProducts('老年')">老年</button>
- </div>
-
- <h3 id="stageTitle">兒童</h3>
- <div class="grid" id="productList"></div>
-
+  <button class="back-button" onclick="showPage('home')">← 返回首頁</button>
+  <h2>產品介紹</h2>
+  <div class="actions">
+    <button class="stage-button selected" id="btn-兒童" onclick="showProducts('兒童')">兒童</button>
+    <button class="stage-button" id="btn-青年" onclick="showProducts('青年')">青年</button>
+    <button class="stage-button" id="btn-壯年" onclick="showProducts('壯年')">壯年</button>
+    <button class="stage-button" id="btn-老年" onclick="showProducts('老年')">老年</button>
+  </div>
+  <h3 id="stageTitle">兒童</h3>
+  <div class="grid" id="productList"></div>
 </section>
 
-
-<!-- 搖搖馬專區 -->
+<!-- 搖搖馬 -->
 <section class="page" id="rocker">
-
- <button class="back-button" onclick="showPage('products')">← 返回產品</button>
-
- <h2>搖搖馬</h2>
-
- <div class="grid">
-
-  <div class="card product-card" onclick="showPage('songs')">
-   <div class="visual">🎵</div>
-   <h3>兒歌天地</h3>
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>搖搖馬</h2>
+  <div class="grid">
+    <div class="card product-card" onclick="showPage('songs')">
+      <div class="visual">🎵</div><h3>兒歌天地</h3>
+    </div>
+    <div class="card product-card" onclick="showPage('stories');renderStories()">
+      <div class="visual">📖</div><h3>故事繪本</h3>
+    </div>
   </div>
-
-  <div class="card product-card" onclick="showPage('stories')">
-   <div class="visual">📖</div>
-   <h3>故事繪本</h3>
-  </div>
-
- </div>
 </section>
 
-
-<!-- 兒歌天地 -->
+<!-- 兒歌 -->
 <section class="page" id="songs">
-
- <button class="back-button" onclick="showPage('rocker')">← 返回搖搖馬</button>
-
- <h2>兒歌天地</h2>
-
- <div class="grid">
-
-  <div class="card song-card">
-   <div class="visual">⭐</div>
-   <h3>小星星</h3>
-   <button class="orange" onclick="openSong('小星星 兒歌')">播放</button>
+  <button class="back-button" onclick="showPage('rocker')">← 返回搖搖馬</button>
+  <h2>兒歌天地</h2>
+  <div class="grid">
+    <div class="card song-card"><div class="visual">⭐</div><h3>小星星</h3><button class="orange" onclick="openSong('小星星 兒歌')">播放</button></div>
+    <div class="card song-card"><div class="visual">🐯</div><h3>兩隻老虎</h3><button class="orange" onclick="openSong('兩隻老虎 兒歌')">播放</button></div>
+    <div class="card song-card"><div class="visual">🥕</div><h3>拔蘿蔔</h3><button class="orange" onclick="openSong('拔蘿蔔 兒歌')">播放</button></div>
+    <div class="card song-card"><div class="visual">🚌</div><h3>公車來了</h3><button class="orange" onclick="openSong('公車來了 兒歌')">播放</button></div>
   </div>
-
-  <div class="card song-card">
-   <div class="visual">🐯</div>
-   <h3>兩隻老虎</h3>
-   <button class="orange" onclick="openSong('兩隻老虎 兒歌')">播放</button>
-  </div>
-
-  <div class="card song-card">
-   <div class="visual">🥕</div>
-   <h3>拔蘿蔔</h3>
-   <button class="orange" onclick="openSong('拔蘿蔔 兒歌')">播放</button>
-  </div>
-
-  <div class="card song-card">
-   <div class="visual">🚌</div>
-   <h3>公車來了</h3>
-   <button class="orange" onclick="openSong('公車來了 兒歌')">播放</button>
-  </div>
-
- </div>
 </section>
-
 
 <!-- 故事列表 -->
 <section class="page" id="stories">
-
- <button class="back-button" onclick="showPage('rocker')">← 返回搖搖馬</button>
-
- <h2>故事繪本</h2>
-
- <div class="grid" id="storyList"></div>
-
+  <button class="back-button" onclick="showPage('rocker')">← 返回搖搖馬</button>
+  <h2>故事繪本</h2>
+  <div class="grid" id="storyList"></div>
 </section>
-
 
 <!-- 故事閱讀 -->
 <section class="page" id="reader">
-
- <button class="back-button" onclick="backToStories()">← 返回故事繪本</button>
-
- <h2 id="readerTitle">故事名稱</h2>
-
- <div class="story-page">
-  <div class="story-illustration" id="storyEmoji">🐰</div>
-  <div class="story-text" id="storyText"></div>
- </div>
-
- <div id="pageNumber" style="text-align:center;margin-top:15px">
-  第 1 頁 / 共 5 頁
- </div>
-
- <div class="story-controls">
-  <button class="secondary" onclick="changeStoryPage(-1)">上一頁</button>
-  <button class="orange" onclick="changeStoryPage(1)">下一頁</button>
- </div>
-
- <!-- 多種語音 -->
- <div class="voice-box">
-
-  <h3>故事語音朗讀</h3>
-
-  <label>選擇語音</label>
-  <select id="voiceSelect">
-   <option value="">正在載入語音...</option>
-  </select>
-
+  <button class="back-button" onclick="backToStories()">← 返回故事繪本</button>
+  <h2 id="readerTitle">故事名稱</h2>
+  <div class="story-page">
+    <div class="story-illustration" id="storyEmoji">🐰</div>
+    <div class="story-text" id="storyText"></div>
+  </div>
+  <div id="pageNumber" class="center" style="margin-top:15px">第 1 頁 / 共 5 頁</div>
   <div class="story-controls">
-   <button class="secondary" onclick="previewVoice()">試聽聲音</button>
+    <button class="secondary" onclick="changeStoryPage(-1)">上一頁</button>
+    <button class="orange" onclick="changeStoryPage(1)">下一頁</button>
   </div>
-
-  <label>朗讀速度：<span id="rateValue">0.88</span></label>
-  <input type="range" id="rate" min="0.65" max="1.3" step="0.05" value="0.88">
-
-  <label>聲音音調：<span id="pitchValue">1.05</span></label>
-  <input type="range" id="pitch" min="0.7" max="1.5" step="0.05" value="1.05">
-
-  <div class="story-controls">
-   <button class="orange" onclick="readStory()">▶ 開始朗讀</button>
-   <button class="secondary" onclick="pauseStory()">Ⅱ 暫停</button>
-   <button class="secondary" onclick="resumeStory()">▶ 繼續</button>
-   <button class="secondary" onclick="stopStory()">■ 停止</button>
+  <div class="voice-box">
+    <h3>故事語音朗讀</h3>
+    <label>選擇語音</label>
+    <select id="voiceSelect"></select>
+    <div class="story-controls">
+      <button class="secondary" onclick="previewVoice()">試聽聲音</button>
+    </div>
+    <label>朗讀速度：<span id="rateValue">0.88</span></label>
+    <input type="range" id="rate" min="0.65" max="1.3" step="0.05" value="0.88">
+    <label>聲音音調：<span id="pitchValue">1.05</span></label>
+    <input type="range" id="pitch" min="0.7" max="1.5" step="0.05" value="1.05">
+    <div class="story-controls">
+      <button class="orange" onclick="readStory()">▶ 開始朗讀</button>
+      <button class="secondary" onclick="pauseStory()">Ⅱ 暫停</button>
+      <button class="secondary" onclick="resumeStory()">▶ 繼續</button>
+      <button class="secondary" onclick="stopStory()">■ 停止</button>
+    </div>
+    <div class="voice-status" id="voiceStatus"></div>
   </div>
-
-  <div class="voice-status" id="voiceStatus">
-   選擇喜歡的聲音即可開始聆聽。
-  </div>
-
- </div>
-
 </section>
-
 
 <!-- 一般產品介紹 -->
 <section class="page" id="productDetail">
-
- <button class="back-button" onclick="showPage('products')">← 返回產品</button>
-
- <div class="card" style="text-align:center">
-  <div class="visual" id="detailEmoji">🚲</div>
-  <h2 id="detailTitle">產品名稱</h2>
- </div>
-
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <div class="card center">
+    <div class="visual" id="detailEmoji">🚲</div>
+    <h2 id="detailTitle">產品名稱</h2>
+  </div>
 </section>
 
+<!-- 兒童滑步車計時 -->
+<section class="page" id="timer">
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>趣味計時挑戰賽</h2>
+  <div class="card center">
+    <div class="visual">⏱️</div>
+    <div class="big-number" id="timerDisplay">00:00.0</div>
+    <div class="actions" style="justify-content:center">
+      <button class="orange" onclick="startTimer()">開始</button>
+      <button class="secondary" onclick="pauseTimer()">暫停</button>
+      <button class="secondary" onclick="resetTimer()">重新計時</button>
+    </div>
+    <h3 id="timerResult">準備開始挑戰！</h3>
+  </div>
+</section>
 
-<!-- GPS 導航 -->
+<!-- 交通號誌遊戲 -->
+<section class="page" id="traffic">
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>交通號誌認識小遊戲</h2>
+  <div class="card center">
+    <div class="traffic-light">
+      <div id="redLight" class="light"></div>
+      <div id="yellowLight" class="light"></div>
+      <div id="greenLight" class="light"></div>
+    </div>
+    <h3 id="trafficQuestion">請按開始遊戲</h3>
+    <button class="orange" onclick="newTrafficQuestion()">開始遊戲</button>
+    <div class="actions" style="justify-content:center">
+      <button class="red" onclick="answerTraffic('stop')">停止</button>
+      <button style="background:#ffe49b" onclick="answerTraffic('slow')">慢行</button>
+      <button class="green" onclick="answerTraffic('go')">通行</button>
+    </div>
+    <h3 id="trafficResult">答對次數：0</h3>
+  </div>
+</section>
+
+<!-- 青年腳踏車 GPS -->
+<section class="page" id="bike">
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>GPS 騎乘軌跡地圖</h2>
+  <div class="card">
+    <div id="bikeMap"></div>
+    <div class="stat-grid">
+      <div class="stat">騎乘距離<strong id="bikeDistance">0.00 km</strong></div>
+      <div class="stat">騎乘時間<strong id="bikeDuration">00:00</strong></div>
+    </div>
+    <div class="actions">
+      <button class="orange" onclick="startBikeTracking()">開始記錄</button>
+      <button class="secondary" onclick="stopBikeTracking()">結束記錄</button>
+      <button class="secondary" onclick="resetBikeTracking()">清除本次</button>
+    </div>
+    <div id="bikeStatus" class="gps-status">尚未開始記錄</div>
+  </div>
+  <div class="card">
+    <h3>歷史運動報表</h3>
+    <div class="actions">
+      <button class="stage-button selected" id="weekBtn" onclick="showBikeReport('week')">週報表</button>
+      <button class="stage-button" id="monthBtn" onclick="showBikeReport('month')">月報表</button>
+    </div>
+    <div id="bikeReport"></div>
+  </div>
+</section>
+
+<!-- 壯年折疊推車導航 -->
 <section class="page" id="navigation">
-
- <button class="back-button" onclick="showPage('products')">← 返回產品</button>
-
- <h2>折疊推車 GPS 導航</h2>
-
- <div class="card" style="text-align:center">
-  <div class="visual">🛒📍</div>
-  <h3>GPS 導航</h3>
- </div>
-
- <div class="gps-card">
-
-  <h3>目前位置</h3>
-
-  <button class="orange" onclick="getCurrentLocation()">📍 取得目前位置</button>
-
-  <div class="gps-status" id="gpsStatus">
-   尚未取得定位
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>折疊推車 GPS 導航</h2>
+  <div class="card center"><div class="visual">🛒📍</div></div>
+  <div class="gps-card">
+    <h3>目前位置</h3>
+    <button class="orange" onclick="getCurrentLocation()">📍 取得目前位置</button>
+    <div class="gps-status" id="gpsStatus">尚未取得定位</div>
   </div>
-
- </div>
-
- <div class="card" style="margin-top:15px">
-
-  <h3>輸入目的地</h3>
-
-  <input
-   class="destination"
-   id="destination"
-   type="text"
-   placeholder="輸入地址或地點名稱"
-  >
-
-  <div class="gps-actions">
-   <button class="orange" onclick="startNavigation()">開始導航 →</button>
-   <button class="secondary" onclick="openMap()">查看地圖</button>
+  <div class="card">
+    <h3>輸入目的地</h3>
+    <input class="destination" id="destination" type="text" placeholder="輸入地址或地點名稱">
+    <div class="gps-actions">
+      <button class="orange" onclick="startNavigation()">開始導航 →</button>
+      <button class="secondary" onclick="openMap()">查看地圖</button>
+    </div>
   </div>
+</section>
 
- </div>
+<!-- 老年買菜車 -->
+<section class="page" id="groceries">
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>買菜車</h2>
+  <div class="card">
+    <h3>常買食材</h3>
+    <div id="frequentFoods"></div>
+  </div>
+  <div class="card">
+    <h3>我的採買清單</h3>
+    <div class="actions">
+      <input id="foodInput" class="form-input" style="flex:1;min-width:150px" placeholder="輸入食材名稱">
+      <button class="orange" onclick="addFood()">新增</button>
+    </div>
+    <div id="foodList"></div>
+    <div class="actions">
+      <button class="orange" onclick="speakShoppingList()">🔊 語音提醒</button>
+      <button class="secondary" onclick="clearFoodList()">清空清單</button>
+    </div>
+  </div>
+  <div class="card">
+    <h3>子女遠端代填清單</h3>
+    <button class="orange" onclick="toggleChildFill()">切換子女代填模式</button>
+    <div id="childFillPanel" style="display:none;margin-top:15px">
+      <input id="childFoodInput" class="form-input" placeholder="子女輸入要購買的食材">
+      <button class="orange" onclick="childAddFood()">加入清單</button>
+    </div>
+  </div>
+</section>
 
+<!-- 老年助行器 -->
+<section class="page" id="walker">
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>助行器</h2>
+  <div class="grid">
+    <div class="card product-card" onclick="showPage('childReport');renderChildReport()">
+      <div class="visual">📊</div><h3>子女端安心日報</h3>
+    </div>
+    <div class="card product-card" onclick="showPage('reminders')">
+      <div class="visual">🔔</div><h3>語音提醒設定</h3>
+    </div>
+  </div>
+</section>
+
+<!-- 子女端安心日報 -->
+<section class="page" id="childReport">
+  <button class="back-button" onclick="showPage('walker')">← 返回助行器</button>
+  <h2>子女端安心日報</h2>
+  <div class="card">
+    <div class="stat-grid">
+      <div class="stat">今日提醒<strong id="reportReminders">0</strong></div>
+      <div class="stat">已完成事項<strong id="reportDone">0</strong></div>
+    </div>
+    <hr>
+    <h3>今日紀錄</h3>
+    <div id="dailyReport"></div>
+    <button class="orange" onclick="speakReport()">🔊 朗讀今日報告</button>
+  </div>
+</section>
+
+<!-- 語音提醒 -->
+<section class="page" id="reminders">
+  <button class="back-button" onclick="showPage('walker')">← 返回助行器</button>
+  <h2>語音提醒設定</h2>
+  <div class="card">
+    <h3>吃藥提醒</h3>
+    <input class="form-input" type="time" id="medicineTime" value="08:00">
+    <button class="orange" onclick="saveReminder('medicine')">設定吃藥提醒</button>
+    <button class="secondary" onclick="speak('記得按時吃藥喔！')">試聽</button>
+  </div>
+  <div class="card">
+    <h3>回診提醒</h3>
+    <input class="form-input" type="date" id="visitDate">
+    <input class="form-input" type="time" id="visitTime" value="09:00">
+    <button class="orange" onclick="saveReminder('visit')">設定回診提醒</button>
+    <button class="secondary" onclick="speak('記得準備好，今天要去回診喔！')">試聽</button>
+  </div>
+  <div class="card">
+    <h3>久坐起身提醒</h3>
+    <select id="sitInterval" class="form-input">
+      <option value="30">每 30 分鐘</option>
+      <option value="45">每 45 分鐘</option>
+      <option value="60" selected>每 60 分鐘</option>
+      <option value="90">每 90 分鐘</option>
+    </select>
+    <button class="orange" onclick="startSitReminder()">啟動久坐提醒</button>
+    <button class="secondary" onclick="stopSitReminder()">關閉提醒</button>
+  </div>
+  <div class="card">
+    <h3>提醒紀錄</h3>
+    <div id="reminderList"></div>
+  </div>
 </section>
 
 </main>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-
-// 頁面切換
+// ---------------- 頁面切換 ----------------
 function showPage(id){
- document.querySelectorAll('.page').forEach(page=>{
-  page.classList.remove('active');
- });
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
 
- document.getElementById(id).classList.add('active');
-
- window.scrollTo(0,0);
+  if(id==='bike')setTimeout(initBikeMap,200);
+  if(id==='groceries')renderGroceries();
+  if(id==='reminders')renderReminders();
 }
 
-
-// 產品資料
+// ---------------- 產品資料 ----------------
 const products={
-
- '兒童':{
-  items:[
-   {icon:'🧸',name:'搖搖馬',special:true},
-   {icon:'🛴',name:'滑步車'},
-   {icon:'🛒',name:'兒童拖車'}
-  ]
- },
-
- '青年':{
-  items:[
-   {icon:'🚲',name:'腳踏車'},
-   {icon:'🛴',name:'滑板車'}
-  ]
- },
-
- '壯年':{
-  items:[
-   {icon:'🛒',name:'折疊推車',navigation:true}
-  ]
- },
-
- '老年':{
-  items:[
-   {icon:'🛒',name:'買菜車'},
-   {icon:'🚶',name:'助行器'}
-  ]
- }
-
+  '兒童':{items:[
+    {icon:'🧸',name:'搖搖馬',page:'rocker'},
+    {icon:'🛴',name:'滑步車',page:'childTools'},
+    {icon:'🛒',name:'兒童拖車',page:'productDetail'}
+  ]},
+  '青年':{items:[
+    {icon:'🚲',name:'腳踏車',page:'bike'},
+    {icon:'🛴',name:'滑板車',page:'productDetail'}
+  ]},
+  '壯年':{items:[
+    {icon:'🛒',name:'折疊推車',page:'navigation'}
+  ]},
+  '老年':{items:[
+    {icon:'🛒',name:'買菜車',page:'groceries'},
+    {icon:'🚶',name:'助行器',page:'walker'}
+  ]}
 };
 
-
-// 首頁年齡選擇
 function openAge(age){
- showProducts(age);
- showPage('products');
+  showProducts(age);
+  showPage('products');
 }
-
-
-// 產品頁
 function showProducts(age){
+  document.getElementById('stageTitle').textContent=age;
+  document.querySelectorAll('.stage-button').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('btn-'+age).classList.add('selected');
 
- const data=products[age];
+  const list=document.getElementById('productList');
+  list.innerHTML='';
 
- document.getElementById('stageTitle').textContent=age;
-
- document.querySelectorAll('.stage-button').forEach(btn=>{
-  btn.classList.remove('selected');
- });
-
- document.getElementById('btn-'+age).classList.add('selected');
-
- const list=document.getElementById('productList');
- list.innerHTML='';
-
- data.items.forEach(item=>{
-
-  const card=document.createElement('div');
-  card.className='card product-card';
-
-  const visual=document.createElement('div');
-  visual.className='visual';
-  visual.textContent=item.icon;
-
-  const title=document.createElement('h3');
-  title.textContent=item.name;
-
-  const button=document.createElement('button');
-  button.className='orange';
-  button.textContent='進入 →';
-
-  card.append(visual,title,button);
-
-  card.onclick=()=>{
-
-   if(item.special){
-    showPage('rocker');
-   }
-   else if(item.navigation){
-    showPage('navigation');
-   }
-   else{
-    document.getElementById('detailEmoji').textContent=item.icon;
-    document.getElementById('detailTitle').textContent=item.name;
-    showPage('productDetail');
-   }
-
-  };
-
-  list.appendChild(card);
-
- });
-
+  products[age].items.forEach(item=>{
+    const card=document.createElement('div');
+    card.className='card product-card';
+    card.innerHTML=`<div class="visual">${item.icon}</div><h3>${item.name}</h3><button class="orange">進入 →</button>`;
+    card.onclick=()=>{
+      if(item.page==='productDetail'){
+        document.getElementById('detailEmoji').textContent=item.icon;
+        document.getElementById('detailTitle').textContent=item.name;
+      }
+      if(item.page==='childTools')showPage('childTools');
+      else showPage(item.page);
+    };
+    list.appendChild(card);
+  });
 }
-
-
-// 兒歌 YouTube
-function openSong(song){
- window.open(
-  'https://www.youtube.com/results?search_query='+encodeURIComponent(song),
-  '_blank'
- );
-}
-
-
-// 六本故事，每本五頁
-const stories=[
-
-{
- title:'小兔子的森林冒險',
- emoji:'🐰',
- pages:[
-  '小兔子今天來到了一座漂亮的森林。\n陽光從樹葉間灑下來，微風吹過草地。',
-  '小兔子看到一隻正在找食物的小松鼠。\n小松鼠問：「你願意陪我一起找橡果嗎？」',
-  '他們走過小河，穿過一片花園。\n路上還遇見了正在唱歌的小鳥。',
-  '終於，他們在大樹下找到好多橡果。\n小松鼠開心地和小兔子分享。',
-  '太陽慢慢下山了，小兔子也準備回家。\n今天真是一次快樂又難忘的森林冒險！'
- ]
-},
-
-{
- title:'找星星的小熊',
- emoji:'🐻',
- pages:[
-  '小熊晚上抬頭看著天空。\n他發現天上有好多閃亮的小星星。',
-  '小熊拿起自己的小望遠鏡。\n他想找出最亮、最特別的那顆星星。',
-  '走到山坡上時，小熊遇見了小狐狸。\n小狐狸也想和他一起找星星。',
-  '他們看到一顆星星躲在雲朵後面。\n等雲朵飄走時，星星又亮了起來。',
-  '小熊終於找到最喜歡的星星。\n他發現，和朋友一起看星星更快樂。'
- ]
-},
-
-{
- title:'小魚的海洋旅行',
- emoji:'🐠',
- pages:[
-  '小魚住在藍藍的大海裡。\n有一天，他決定出發去看看海洋的其他地方。',
-  '小魚游過美麗的珊瑚礁。\n五顏六色的魚兒在身邊游來游去。',
-  '接著，小魚遇見一隻海龜。\n海龜帶著他認識海底的漂亮花園。',
-  '他們看見陽光照進海水裡。\n水面閃閃發亮，就像好多小星星。',
-  '旅行結束後，小魚回到了自己的家。\n他把今天看到的風景分享給大家。'
- ]
-},
-
-{
- title:'恐龍小小探險家',
- emoji:'🦕',
- pages:[
-  '小恐龍最喜歡探索新地方。\n今天，他決定到森林另一邊看看。',
-  '他走過高高的樹木，看到好多奇妙的植物。\n每一片葉子都讓他覺得很新鮮。',
-  '途中，小恐龍遇見迷路的小甲龍。\n他決定陪小甲龍一起尋找回家的路。',
-  '他們沿著河邊走，終於找到熟悉的大岩石。\n小甲龍開心地認出了自己的家。',
-  '小恐龍也準備回家了。\n他發現幫助朋友也是一次很棒的冒險。'
- ]
-},
-
-{
- title:'小種子的願望',
- emoji:'🌱',
- pages:[
-  '一顆小種子躺在溫暖的泥土裡。\n他希望有一天可以長成一棵大樹。',
-  '下了一場雨，泥土變得濕濕的。\n小種子慢慢吸收水分，準備發芽。',
-  '溫暖的陽光照進土裡。\n小種子努力伸出嫩嫩的小芽。',
-  '日子一天天過去，小芽長出了葉子。\n小蝴蝶和小蜜蜂也來到旁邊。',
-  '小種子終於長成一株健康的小植物。\n他知道，只要慢慢成長，就能實現願望。'
- ]
-},
-
-{
- title:'分享快樂的小熊',
- emoji:'🧸',
- pages:[
-  '小熊收到了一盒漂亮的餅乾。\n他開心地想著，要怎麼享用這些餅乾。',
-  '小兔子剛好經過，看起來有點肚子餓。\n小熊決定邀請小兔子一起吃。',
-  '接著，小松鼠和小狐狸也來了。\n大家圍在一起，開心地分享點心。',
-  '餅乾雖然變少了，但是大家的笑聲變多了。\n小熊覺得心裡暖暖的。',
-  '小熊發現，分享不但能讓朋友快樂，\n也能讓自己感到幸福。'
- ]
-}
-];
-
-let currentStory=0;
-let currentStoryPage=0;
-
-
-// 故事列表
-function renderStories(){
-
- const list=document.getElementById('storyList');
- list.innerHTML='';
-
- stories.forEach((story,index)=>{
-
-  const card=document.createElement('div');
-  card.className='card story-cover';
-
-  const visual=document.createElement('div');
-  visual.className='visual';
-  visual.textContent=story.emoji;
-
-  const title=document.createElement('h3');
-  title.textContent=story.title;
-
-  const button=document.createElement('button');
-  button.className='orange';
-  button.textContent='開始閱讀';
-
-  card.append(visual,title,button);
-  card.onclick=()=>openStory(index);
-
-  list.appendChild(card);
-
- });
-
-}
-
-function openStory(index){
- stopStory();
-
- currentStory=index;
- currentStoryPage=0;
-
- showPage('reader');
- renderStoryPage();
-}
-
-function backToStories(){
- stopStory();
- showPage('stories');
-}
-
-function renderStoryPage(){
-
- const story=stories[currentStory];
-
- document.getElementById('readerTitle').textContent=story.title;
- document.getElementById('storyEmoji').textContent=story.emoji;
- document.getElementById('storyText').textContent=
-  story.pages[currentStoryPage];
-
- document.getElementById('pageNumber').textContent=
-  '第 '+(currentStoryPage+1)+' 頁 / 共 '+story.pages.length+' 頁';
-
- stopStory();
-}
-
-function changeStoryPage(direction){
-
- const next=currentStoryPage+direction;
-
- if(next<0 || next>=stories[currentStory].pages.length)return;
-
- currentStoryPage=next;
- renderStoryPage();
-}
-
-
-// 多種中文語音
-const voiceSelect=document.getElementById('voiceSelect');
-const voiceStatus=document.getElementById('voiceStatus');
-
-let chineseVoices=[];
-let speechToken=0;
-
-function loadVoices(){
-
- const voices=speechSynthesis.getVoices();
-
- chineseVoices=voices.filter(v=>
-  v.lang.toLowerCase().startsWith('zh')
- );
-
- voiceSelect.innerHTML='';
-
- if(chineseVoices.length===0){
-
-  const option=document.createElement('option');
-  option.value='';
-  option.textContent='目前沒有中文語音';
-
-  voiceSelect.appendChild(option);
-
-  voiceStatus.textContent='目前裝置沒有找到中文語音。';
-  return;
- }
-
- chineseVoices.forEach((voice,index)=>{
-
-  const option=document.createElement('option');
-  option.value=index;
-  option.textContent=voice.name+'（'+voice.lang+'）';
-
-  voiceSelect.appendChild(option);
-
- });
-
- const twIndex=chineseVoices.findIndex(v=>
-  v.lang.toLowerCase()==='zh-tw'
- );
-
- if(twIndex>=0){
-  voiceSelect.value=twIndex;
- }
-
- voiceStatus.textContent='已載入 '+chineseVoices.length+' 種中文語音。';
-}
-
-speechSynthesis.onvoiceschanged=loadVoices;
-loadVoices();
-
-
-// 取得選擇的語音
-function getSelectedVoice(){
-
- const index=Number(voiceSelect.value);
- return chineseVoices[index] || null;
-
-}
-
-
-// 試聽語音
-function previewVoice(){
-
- speechSynthesis.cancel();
-
- const speech=new SpeechSynthesisUtterance(
-  '你好，歡迎來到 REGO 故事繪本。今天我們一起來聽一個有趣的故事吧！'
- );
-
- const voice=getSelectedVoice();
-
- if(voice){
-  speech.voice=voice;
-  speech.lang=voice.lang;
- }else{
-  speech.lang='zh-TW';
- }
-
- speech.rate=Number(document.getElementById('rate').value);
- speech.pitch=Number(document.getElementById('pitch').value);
- speech.volume=1;
-
- speech.onstart=()=>{
-  voiceStatus.textContent='正在試聽語音……';
- };
-
- speech.onend=()=>{
-  voiceStatus.textContent='試聽完成，可以選擇其他聲音。';
- };
-
- speech.onerror=()=>{
-  voiceStatus.textContent='語音播放失敗，請再試一次。';
- };
-
- speechSynthesis.speak(speech);
-
-}
-
-
-// 朗讀故事
-function readStory(){
-
- stopStory();
-
- const story=stories[currentStory];
- const text=story.pages[currentStoryPage];
-
- const speech=new SpeechSynthesisUtterance(text);
- const voice=getSelectedVoice();
-
- if(voice){
-  speech.voice=voice;
-  speech.lang=voice.lang;
- }else{
-  speech.lang='zh-TW';
- }
-
- speech.rate=Number(document.getElementById('rate').value);
- speech.pitch=Number(document.getElementById('pitch').value);
- speech.volume=1;
-
- const token=++speechToken;
-
- speech.onstart=()=>{
-  if(token===speechToken){
-   voiceStatus.textContent='正在朗讀故事……';
-  }
- };
-
- speech.onend=()=>{
-  if(token!==speechToken)return;
-
-  if(currentStoryPage<story.pages.length-1){
-
-   voiceStatus.textContent='下一頁即將開始……';
-
-   setTimeout(()=>{
-
-    if(token!==speechToken)return;
-
-    currentStoryPage++;
-    renderStoryPage();
-    readStory();
-
-   },800);
-
-  }else{
-
-   voiceStatus.textContent='故事已經全部讀完囉！';
-
-  }
- };
-
- speech.onerror=()=>{
-  if(token===speechToken){
-   voiceStatus.textContent='播放遇到問題，請重新試一次。';
-  }
- };
-
- speechSynthesis.speak(speech);
-
-}
-
-function pauseStory(){
-
- if(speechSynthesis.speaking){
-  speechSynthesis.pause();
-  voiceStatus.textContent='已暫停播放。';
- }
-
-}
-
-function resumeStory(){
-
- if(speechSynthesis.paused){
-  speechSynthesis.resume();
-  voiceStatus.textContent='繼續朗讀故事……';
- }
-
-}
-
-function stopStory(){
-
- speechToken++;
- speechSynthesis.cancel();
-
- if(voiceStatus){
-  voiceStatus.textContent='已停止播放。';
- }
-
-}
-
-
-// 語速及音調
-document.getElementById('rate').addEventListener('input',function(){
-
- document.getElementById('rateValue').textContent=
-  Number(this.value).toFixed(2);
-
-});
-
-document.getElementById('pitch').addEventListener('input',function(){
-
- document.getElementById('pitchValue').textContent=
-  Number(this.value).toFixed(2);
-
-});
-
-
-// GPS 定位
-let currentLatitude=null;
-let currentLongitude=null;
-
-function getCurrentLocation(){
-
- const status=document.getElementById('gpsStatus');
-
- if(!navigator.geolocation){
-  status.textContent='此裝置或瀏覽器不支援 GPS 定位。';
-  return;
- }
-
- status.textContent='正在取得目前位置……';
-
- navigator.geolocation.getCurrentPosition(
-
-  function(position){
-
-   currentLatitude=position.coords.latitude;
-   currentLongitude=position.coords.longitude;
-
-   status.innerHTML=
-    '定位成功！<br>'+
-    '緯度：'+currentLatitude.toFixed(6)+'<br>'+
-    '經度：'+currentLongitude.toFixed(6);
-
-  },
-
-  function(error){
-
-   if(error.code===1){
-    status.textContent='尚未允許定位權限，請在瀏覽器設定中開啟定位。';
-   }else if(error.code===2){
-    status.textContent='目前無法取得位置，請確認裝置定位功能。';
-   }else{
-    status.textContent='定位逾時，請再試一次。';
-   }
-
-  },
-
-  {
-   enableHighAccuracy:true,
-   timeout:15000,
-   maximumAge:0
-  }
-
- );
-
-}
-
-
-// 開啟 Google 地圖導航
-function startNavigation(){
-
- const destination=document.getElementById('destination').value.trim();
-
- if(!destination){
-  alert('請先輸入目的地。');
-  return;
- }
-
- if(currentLatitude===null || currentLongitude===null){
-  alert('請先取得目前位置。');
-  return;
- }
-
- const origin=currentLatitude+','+currentLongitude;
-
- const url=
-  'https://www.google.com/maps/dir/?api=1'+
-  '&origin='+encodeURIComponent(origin)+
-  '&destination='+encodeURIComponent(destination)+
-  '&travelmode=walking';
-
- window.open(url,'_blank');
-
-}
-
-
-// 只開啟地圖搜尋目的地
-function openMap(){
-
- const destination=document.getElementById('destination').value.trim();
-
- if(!destination){
-  alert('請先輸入目的地。');
-  return;
- }
-
- const url=
-  'https://www.google.com/maps/search/?api=1&query='+
-  encodeURIComponent(destination);
-
- window.open(url,'_blank');
-
-}
-
-
-// 預設產品
 showProducts('兒童');
 
+// ---------------- 兒歌 ----------------
+function openSong(song){
+  window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(song),'_blank');
+}
+
+// ---------------- 六本故事繪本 ----------------
+const stories=[
+{
+ title:'小兔子的森林冒險',emoji:'🐰',
+ pages:[
+ '小兔子今天來到了一座漂亮的森林。\n陽光從樹葉間灑下來，微風吹過草地。',
+ '小兔子看到一隻正在找食物的小松鼠。\n小松鼠問：「你願意陪我一起找橡果嗎？」',
+ '他們走過小河，穿過一片花園。\n路上還遇見了正在唱歌的小鳥。',
+ '終於，他們在大樹下找到好多橡果。\n小松鼠開心地和小兔子分享。',
+ '太陽慢慢下山了，小兔子也準備回家。\n今天真是一次快樂又難忘的森林冒險！'
+ ]},
+{
+ title:'找星星的小熊',emoji:'🐻',
+ pages:[
+ '小熊晚上抬頭看著天空。\n他發現天上有好多閃亮的小星星。',
+ '小熊拿起自己的小望遠鏡。\n他想找出最亮、最特別的那顆星星。',
+ '走到山坡上時，小熊遇見了小狐狸。\n小狐狸也想和他一起找星星。',
+ '他們看到一顆星星躲在雲朵後面。\n等雲朵飄走時，星星又亮了起來。',
+ '小熊終於找到最喜歡的星星。\n他發現，和朋友一起看星星更快樂。'
+ ]},
+{
+ title:'小魚的海洋旅行',emoji:'🐠',
+ pages:[
+ '小魚住在藍藍的大海裡。\n有一天，他決定出發去看看海洋的其他地方。',
+ '小魚游過美麗的珊瑚礁。\n五顏六色的魚兒在身邊游來游去。',
+ '接著，小魚遇見一隻海龜。\n海龜帶著他認識海底的漂亮花園。',
+ '他們看見陽光照進海水裡。\n水面閃閃發亮，就像好多小星星。',
+ '旅行結束後，小魚回到了自己的家。\n他把今天看到的風景分享給大家。'
+ ]},
+{
+ title:'恐龍小小探險家',emoji:'🦕',
+ pages:[
+ '小恐龍最喜歡探索新地方。\n今天，他決定到森林另一邊看看。',
+ '他走過高高的樹木，看到好多奇妙的植物。\n每一片葉子都讓他覺得很新鮮。',
+ '途中，小恐龍遇見迷路的小甲龍。\n他決定陪小甲龍一起尋找回家的路。',
+ '他們沿著河邊走，終於找到熟悉的大岩石。\n小甲龍開心地認出了自己的家。',
+ '小恐龍也準備回家了。\n他發現幫助朋友也是一次很棒的冒險。'
+ ]},
+{
+ title:'小種子的願望',emoji:'🌱',
+ pages:[
+ '一顆小種子躺在溫暖的泥土裡。\n他希望有一天可以長成一棵大樹。',
+ '下了一場雨，泥土變得濕濕的。\n小種子慢慢吸收水分，準備發芽。',
+ '溫暖的陽光照進土裡。\n小種子努力伸出嫩嫩的小芽。',
+ '日子一天天過去，小芽長出了葉子。\n小蝴蝶和小蜜蜂也來到旁邊。',
+ '小種子終於長成一株健康的小植物。\n他知道，只要慢慢成長，就能實現願望。'
+ ]},
+{
+ title:'分享快樂的小熊',emoji:'🧸',
+ pages:[
+ '小熊收到了一盒漂亮的餅乾。\n他開心地想著，要怎麼享用這些餅乾。',
+ '小兔子剛好經過，看起來有點肚子餓。\n小熊決定邀請小兔子一起吃。',
+ '接著，小松鼠和小狐狸也來了。\n大家圍在一起，開心地分享點心。',
+ '餅乾雖然變少了，但是大家的笑聲變多了。\n小熊覺得心裡暖暖的。',
+ '小熊發現，分享不但能讓朋友快樂，\n也能讓自己感到幸福。'
+ ]}
+];
+
+let currentStory=0,currentStoryPage=0,speechToken=0;
+function renderStories(){
+  const list=document.getElementById('storyList');
+  list.innerHTML='';
+  stories.forEach((s,i)=>{
+    const card=document.createElement('div');
+    card.className='card story-cover';
+    card.innerHTML=`<div class="visual">${s.emoji}</div><h3>${s.title}</h3><button class="orange">開始閱讀</button>`;
+    card.onclick=()=>openStory(i);
+    list.appendChild(card);
+  });
+}
+function openStory(i){
+  stopStory();
+  currentStory=i;
+  currentStoryPage=0;
+  showPage('reader');
+  renderStoryPage();
+}
+function backToStories(){
+  stopStory();
+  showPage('stories');
+  renderStories();
+}
+function renderStoryPage(){
+  const s=stories[currentStory];
+  document.getElementById('readerTitle').textContent=s.title;
+  document.getElementById('storyEmoji').textContent=s.emoji;
+  document.getElementById('storyText').textContent=s.pages[currentStoryPage];
+  document.getElementById('pageNumber').textContent=`第 ${currentStoryPage+1} 頁 / 共 ${s.pages.length} 頁`;
+}
+function changeStoryPage(d){
+  const n=currentStoryPage+d;
+  if(n<0||n>=stories[currentStory].pages.length)return;
+  stopStory();
+  currentStoryPage=n;
+  renderStoryPage();
+}
+
+// ---------------- 多種語音 ----------------
+const voiceSelect=document.getElementById('voiceSelect');
+const voiceStatus=document.getElementById('voiceStatus');
+let chineseVoices=[];
+
+function loadVoices(){
+  if(!('speechSynthesis' in window))return;
+  chineseVoices=speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().startsWith('zh'));
+  voiceSelect.innerHTML='';
+  if(!chineseVoices.length){
+    voiceSelect.innerHTML='<option value="">目前沒有中文語音</option>';
+    voiceStatus.textContent='請確認裝置是否有安裝中文語音。';
+    return;
+  }
+  chineseVoices.forEach((v,i)=>{
+    const o=document.createElement('option');
+    o.value=i;
+    o.textContent=v.name+'（'+v.lang+'）';
+    voiceSelect.appendChild(o);
+  });
+  const tw=chineseVoices.findIndex(v=>v.lang.toLowerCase()==='zh-tw');
+  if(tw>=0)voiceSelect.value=tw;
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged=loadVoices;
+  loadVoices();
+}
+function selectedVoice(){
+  return chineseVoices[Number(voiceSelect.value)]||null;
+}
+function speak(text){
+  if(!('speechSynthesis' in window)){
+    alert('此瀏覽器不支援語音功能');
+    return;
+  }
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  const v=selectedVoice();
+  if(v){u.voice=v;u.lang=v.lang}
+  else u.lang='zh-TW';
+  u.rate=Number(document.getElementById('rate')?.value||0.88);
+  u.pitch=Number(document.getElementById('pitch')?.value||1.05);
+  speechSynthesis.speak(u);
+}
+function previewVoice(){
+  speak('你好，歡迎來到 REGO 故事繪本。今天我們一起來聽一個有趣的故事吧！');
+}
+function readStory(){
+  stopStory();
+  const token=++speechToken;
+  const s=stories[currentStory];
+  const u=new SpeechSynthesisUtterance(s.pages[currentStoryPage]);
+  const v=selectedVoice();
+  if(v){u.voice=v;u.lang=v.lang}else u.lang='zh-TW';
+  u.rate=Number(document.getElementById('rate').value);
+  u.pitch=Number(document.getElementById('pitch').value);
+  u.onstart=()=>{if(token===speechToken)voiceStatus.textContent='正在朗讀故事……'};
+  u.onend=()=>{
+    if(token!==speechToken)return;
+    if(currentStoryPage<s.pages.length-1){
+      setTimeout(()=>{
+        if(token!==speechToken)return;
+        currentStoryPage++;
+        renderStoryPage();
+        readStory();
+      },700);
+    }else voiceStatus.textContent='故事已經全部讀完囉！';
+  };
+  u.onerror=()=>{voiceStatus.textContent='語音播放失敗，請再試一次。'};
+  speechSynthesis.speak(u);
+}
+function pauseStory(){
+  if(speechSynthesis.speaking)speechSynthesis.pause();
+}
+function resumeStory(){
+  if(speechSynthesis.paused)speechSynthesis.resume();
+}
+function stopStory(){
+  speechToken++;
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+  if(voiceStatus)voiceStatus.textContent='已停止播放。';
+}
+document.getElementById('rate').addEventListener('input',e=>{
+  document.getElementById('rateValue').textContent=Number(e.target.value).toFixed(2);
+});
+document.getElementById('pitch').addEventListener('input',e=>{
+  document.getElementById('pitchValue').textContent=Number(e.target.value).toFixed(2);
+});
+
+// ---------------- 兒童滑步車趣味計時 ----------------
+let timerStart=0,timerElapsed=0,timerInterval=null;
+function formatTimer(ms){
+  const t=ms/1000;
+  const m=Math.floor(t/60);
+  const s=Math.floor(t%60);
+  const d=Math.floor((t%1)*10);
+  return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+d;
+}
+function updateTimer(){
+  const ms=timerElapsed+(timerInterval?Date.now()-timerStart:0);
+  document.getElementById('timerDisplay').textContent=formatTimer(ms);
+}
+function startTimer(){
+  if(timerInterval)return;
+  timerStart=Date.now();
+  timerInterval=setInterval(updateTimer,100);
+  document.getElementById('timerResult').textContent='挑戰進行中！';
+}
+function pauseTimer(){
+  if(!timerInterval)return;
+  timerElapsed+=Date.now()-timerStart;
+  clearInterval(timerInterval);
+  timerInterval=null;
+  updateTimer();
+  document.getElementById('timerResult').textContent='挑戰暫停';
+}
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerInterval=null;
+  timerElapsed=0;
+  updateTimer();
+  document.getElementById('timerResult').textContent='準備開始挑戰！';
+}
+
+// ---------------- 交通號誌遊戲 ----------------
+let trafficAnswer='',trafficScore=0;
+const trafficLights=['red','yellow','green'];
+function newTrafficQuestion(){
+  trafficAnswer=trafficLights[Math.floor(Math.random()*3)];
+  ['red','yellow','green'].forEach(c=>{
+    document.getElementById(c+'Light').className='light';
+  });
+  document.getElementById(trafficAnswer+'Light').classList.add('on',trafficAnswer+'-light');
+  const words={red:'紅燈',yellow:'黃燈',green:'綠燈'};
+  document.getElementById('trafficQuestion').textContent='現在是'+words[trafficAnswer]+'，應該怎麼做？';
+  document.getElementById('trafficResult').textContent='答對次數：'+trafficScore;
+}
+function answerTraffic(answer){
+  if(!trafficAnswer){
+    document.getElementById('trafficQuestion').textContent='請先開始遊戲！';
+    return;
+  }
+  const correct={red:'stop',yellow:'slow',green:'go'};
+  if(answer===correct[trafficAnswer]){
+    trafficScore++;
+    document.getElementById('trafficResult').textContent='答對了！目前答對 '+trafficScore+' 次';
+  }else{
+    document.getElementById('trafficResult').textContent='再想想看！答對次數：'+trafficScore;
+  }
+  trafficAnswer='';
+}
+
+// ---------------- 青年腳踏車 GPS 軌跡 ----------------
+let bikeMap=null,bikeMarker=null,bikeLine=null,bikeWatch=null;
+let bikePoints=[],bikeDistance=0,bikeStartTime=null,bikeTimer=null;
+function initBikeMap(){
+  if(!window.L)return;
+  if(!bikeMap){
+    bikeMap=L.map('bikeMap').setView([25.033,121.5654],13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'© OpenStreetMap'
+    }).addTo(bikeMap);
+    bikeLine=L.polyline([],{color:'#f29a38',weight:5}).addTo(bikeMap);
+  }
+  setTimeout(()=>bikeMap.invalidateSize(),100);
+}
+function distanceBetween(a,b){
+  const R=6371000;
+  const rad=x=>x*Math.PI/180;
+  const dLat=rad(b.lat-a.lat),dLon=rad(b.lng-a.lng);
+  const x=Math.sin(dLat/2)**2+
+    Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;
+  return 2*R*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+}
+function startBikeTracking(){
+  if(bikeWatch!==null)return;
+  if(!navigator.geolocation){
+    document.getElementById('bikeStatus').textContent='瀏覽器不支援定位功能。';
+    return;
+  }
+  bikeStartTime=Date.now();
+  bikeTimer=setInterval(updateBikeDuration,1000);
+  document.getElementById('bikeStatus').textContent='正在記錄騎乘軌跡……';
+  bikeWatch=navigator.geolocation.watchPosition(pos=>{
+    const p={lat:pos.coords.latitude,lng:pos.coords.longitude};
+    if(bikePoints.length){
+      bikeDistance+=distanceBetween(bikePoints[bikePoints.length-1],p);
+    }
+    bikePoints.push(p);
+    bikeLine.setLatLngs(bikePoints);
+    if(bikeMarker)bikeMap.removeLayer(bikeMarker);
+    bikeMarker=L.marker([p.lat,p.lng]).addTo(bikeMap);
+    bikeMap.setView([p.lat,p.lng],16);
+    updateBikeStats();
+  },err=>{
+    document.getElementById('bikeStatus').textContent='無法取得定位，請檢查定位權限。';
+    stopBikeTracking();
+  },{enableHighAccuracy:true,maximumAge:1000,timeout:15000});
+}
+function updateBikeDuration(){
+  if(!bikeStartTime)return;
+  const sec=Math.floor((Date.now()-bikeStartTime)/1000);
+  document.getElementById('bikeDuration').textContent=
+    String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');
+}
+function updateBikeStats(){
+  document.getElementById('bikeDistance').textContent=(bikeDistance/1000).toFixed(2)+' km';
+}
+function stopBikeTracking(){
+  if(bikeWatch!==null){
+    navigator.geolocation.clearWatch(bikeWatch);
+    bikeWatch=null;
+  }
+  clearInterval(bikeTimer);
+  bikeTimer=null;
+  if(bikeStartTime){
+    const duration=Math.floor((Date.now()-bikeStartTime)/1000);
+    if(bikePoints.length>1){
+      const records=JSON.parse(localStorage.getItem('bikeRecords')||'[]');
+      records.push({
+        date:new Date().toISOString(),
+        distance:bikeDistance/1000,
+        duration:duration
+      });
+      localStorage.setItem('bikeRecords',JSON.stringify(records));
+    }
+  }
+  bikeStartTime=null;
+  document.getElementById('bikeStatus').textContent='本次記錄已結束。';
+  showBikeReport('week');
+}
+function resetBikeTracking(){
+  stopBikeTracking();
+  bikePoints=[];
+  bikeDistance=0;
+  bikeStartTime=null;
+  if(bikeLine)bikeLine.setLatLngs([]);
+  if(bikeMarker&&bikeMap)bikeMap.removeLayer(bikeMarker);
+  bikeMarker=null;
+  document.getElementById('bikeDistance').textContent='0.00 km';
+  document.getElementById('bikeDuration').textContent='00:00';
+  document.getElementById('bikeStatus').textContent='已清除本次紀錄';
+}
+function showBikeReport(type){
+  document.getElementById('weekBtn').classList.toggle('selected',type==='week');
+  document.getElementById('monthBtn').classList.toggle('selected',type==='month');
+  const records=JSON.parse(localStorage.getItem('bikeRecords')||'[]');
+  const now=new Date();
+  const filtered=records.filter(r=>{
+    const d=new Date(r.date);
+    if(type==='week'){
+      const start=new Date(now);
+      start.setDate(now.getDate()-7);
+      return d>=start;
+    }
+    return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();
+  });
+  const km=filtered.reduce((a,b)=>a+b.distance,0);
+  const mins=filtered.reduce((a,b)=>a+b.duration,0);
+  document.getElementById('bikeReport').innerHTML=`
+    <div class="stat-grid">
+      <div class="stat">騎乘次數<strong>${filtered.length}</strong></div>
+      <div class="stat">總距離<strong>${km.toFixed(2)} km</strong></div>
+      <div class="stat">總時間<strong>${Math.floor(mins/60)} 小時</strong></div>
+      <div class="stat">平均距離<strong>${filtered.length?(km/filtered.length).toFixed(2):'0.00'} km</strong></div>
+    </div>`;
+}
+
+// ---------------- 壯年 GPS 導航 ----------------
+let currentLatitude=null,currentLongitude=null;
+function getCurrentLocation(){
+  const status=document.getElementById('gpsStatus');
+  if(!navigator.geolocation){
+    status.textContent='此瀏覽器不支援定位功能。';return;
+  }
+  status.textContent='正在取得目前位置……';
+  navigator.geolocation.getCurrentPosition(pos=>{
+    currentLatitude=pos.coords.latitude;
+    currentLongitude=pos.coords.longitude;
+    status.textContent='定位成功！目前位置：'+currentLatitude.toFixed(5)+', '+currentLongitude.toFixed(5);
+  },()=>{
+    status.textContent='無法取得位置，請允許瀏覽器使用定位。';
+  },{enableHighAccuracy:true,timeout:15000});
+}
+function startNavigation(){
+  const dest=document.getElementById('destination').value.trim();
+  if(!dest){alert('請先輸入目的地。');return}
+  if(currentLatitude===null){alert('請先取得目前位置。');return}
+  const origin=currentLatitude+','+currentLongitude;
+  const url='https://www.google.com/maps/dir/?api=1&origin='+
+    encodeURIComponent(origin)+'&destination='+encodeURIComponent(dest)+'&travelmode=walking';
+  window.open(url,'_blank');
+}
+function openMap(){
+  const dest=document.getElementById('destination').value.trim();
+  if(!dest){alert('請先輸入目的地。');return}
+  window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(dest),'_blank');
+}
+
+// ---------------- 老年買菜車清單 ----------------
+const frequentItems=['雞蛋','牛奶','青菜','豆腐','水果','吐司','米','肉'];
+function getFoods(){return JSON.parse(localStorage.getItem('regoFoods')||'[]')}
+function saveFoods(arr){localStorage.setItem('regoFoods',JSON.stringify(arr))}
+function renderGroceries(){
+  const frequent=document.getElementById('frequentFoods');
+  frequent.innerHTML='';
+  frequentItems.forEach(food=>{
+    const b=document.createElement('button');
+    b.className='secondary';
+    b.textContent='+ '+food;
+    b.onclick=()=>{const arr=getFoods();if(!arr.includes(food)){arr.push(food);saveFoods(arr);renderGroceries()}};
+    frequent.appendChild(b);
+  });
+  const list=document.getElementById('foodList');
+  list.innerHTML='';
+  getFoods().forEach((food,i)=>{
+    const row=document.createElement('div');
+    row.className='list-row';
+    row.innerHTML=`<label>${food}</label><button class="red">刪除</button>`;
+    row.querySelector('button').onclick=()=>{
+      const arr=getFoods();arr.splice(i,1);saveFoods(arr);renderGroceries();
+    };
+    list.appendChild(row);
+  });
+}
+function addFood(){
+  const input=document.getElementById('foodInput');
+  const food=input.value.trim();
+  if(!food)return;
+  const arr=getFoods();arr.push(food);saveFoods(arr);
+  input.value='';renderGroceries();
+}
+function childAddFood(){
+  const input=document.getElementById('childFoodInput');
+  const food=input.value.trim();
+  if(!food)return;
+  const arr=getFoods();arr.push(food);saveFoods(arr);
+  input.value='';renderGroceries();
+  alert('已加入採買清單！');
+}
+function toggleChildFill(){
+  const panel=document.getElementById('childFillPanel');
+  panel.style.display=panel.style.display==='none'?'block':'none';
+}
+function clearFoodList(){
+  if(confirm('確定要清空採買清單嗎？')){
+    saveFoods([]);renderGroceries();
+  }
+}
+function speakShoppingList(){
+  const arr=getFoods();
+  if(!arr.length){speak('目前沒有採買項目。');return}
+  speak('今天要買的東西有：'+arr.join('、')+'。出門前記得確認清單喔！');
+}
+
+// ---------------- 老年助行器安心日報 ----------------
+function getLogs(){return JSON.parse(localStorage.getItem('regoLogs')||'[]')}
+function addLog(text){
+  const logs=getLogs();
+  logs.push({text,date:new Date().toLocaleString('zh-TW')});
+  localStorage.setItem('regoLogs',JSON.stringify(logs));
+}
+function renderChildReport(){
+  const logs=getLogs();
+  document.getElementById('reportReminders').textContent=logs.length;
+  document.getElementById('reportDone').textContent=logs.filter(x=>x.text.includes('完成')).length;
+  const box=document.getElementById('dailyReport');
+  box.innerHTML='';
+  if(!logs.length){
+    box.textContent='目前還沒有提醒紀錄。';
+    return;
+  }
+  logs.slice().reverse().forEach(item=>{
+    const row=document.createElement('div');
+    row.className='list-row';
+    row.textContent=item.date+'｜'+item.text;
+    box.appendChild(row);
+  });
+}
+function speakReport(){
+  const logs=getLogs();
+  if(!logs.length){speak('今天目前沒有提醒紀錄。');return}
+  speak('今日安心日報。'+logs.map(x=>x.text).join('。'));
+}
+
+// ---------------- 語音提醒 ----------------
+let sitIntervalTimer=null,reminderCheckTimer=null;
+let reminderData=JSON.parse(localStorage.getItem('regoReminders')||'{}');
+function saveReminder(type){
+  if(type==='medicine'){
+    reminderData.medicine=document.getElementById('medicineTime').value;
+    addLog('設定吃藥提醒 '+reminderData.medicine);
+  }else{
+    reminderData.visitDate=document.getElementById('visitDate').value;
+    reminderData.visitTime=document.getElementById('visitTime').value;
+    addLog('設定回診提醒 '+reminderData.visitDate+' '+reminderData.visitTime);
+  }
+  localStorage.setItem('regoReminders',JSON.stringify(reminderData));
+  alert('提醒已儲存！');
+  renderReminders();
+}
+function renderReminders(){
+  reminderData=JSON.parse(localStorage.getItem('regoReminders')||'{}');
+  document.getElementById('medicineTime').value=reminderData.medicine||'08:00';
+  document.getElementById('visitDate').value=reminderData.visitDate||'';
+  document.getElementById('visitTime').value=reminderData.visitTime||'09:00';
+  const box=document.getElementById('reminderList');
+  box.innerHTML='';
+  if(reminderData.medicine){
+    const d=document.createElement('div');
+    d.className='list-row';d.textContent='吃藥提醒：'+reminderData.medicine;box.appendChild(d);
+  }
+  if(reminderData.visitDate){
+    const d=document.createElement('div');
+    d.className='list-row';d.textContent='回診提醒：'+reminderData.visitDate+' '+reminderData.visitTime;box.appendChild(d);
+  }
+  if(!box.children.length)box.textContent='尚未設定提醒。';
+}
+function startSitReminder(){
+  stopSitReminder();
+  const minutes=Number(document.getElementById('sitInterval').value);
+  sitIntervalTimer=setInterval(()=>{
+    speak('已經坐一段時間囉！記得起來活動一下。');
+    addLog('久坐起身提醒');
+  },minutes*60*1000);
+  alert('久坐提醒已啟動。');
+}
+function stopSitReminder(){
+  if(sitIntervalTimer)clearInterval(sitIntervalTimer);
+  sitIntervalTimer=null;
+}
+
+// 每分鐘檢查吃藥及回診提醒
+function checkScheduledReminders(){
+  const now=new Date();
+  const today=now.toISOString().slice(0,10);
+  const time=now.toTimeString().slice(0,5);
+  const key=today+' '+time;
+  if(reminderData.medicine===time && localStorage.getItem('lastMedicineReminder')!==key){
+    speak('提醒你，現在是吃藥時間囉！');
+    addLog('吃藥提醒');
+    localStorage.setItem('lastMedicineReminder',key);
+  }
+  if(reminderData.visitDate===today && reminderData.visitTime===time &&
+     localStorage.getItem('lastVisitReminder')!==key){
+    speak('今天要回診喔！記得準備出門。');
+    addLog('回診提醒');
+    localStorage.setItem('lastVisitReminder',key);
+  }
+}
+reminderCheckTimer=setInterval(checkScheduledReminders,30000);
+
+// ---------------- 滑步車功能頁 ----------------
 </script>
+
+<section class="page" id="childTools">
+  <button class="back-button" onclick="showPage('products')">← 返回產品</button>
+  <h2>滑步車</h2>
+  <div class="grid">
+    <div class="card product-card" onclick="showPage('timer')">
+      <div class="visual">⏱️</div><h3>趣味計時挑戰賽</h3>
+    </div>
+    <div class="card product-card" onclick="showPage('traffic')">
+      <div class="visual">🚦</div><h3>交通號誌認識小遊戲</h3>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
